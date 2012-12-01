@@ -18,7 +18,7 @@
 
 package thothbot.parallax.core.shared.core;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.shared.Float64Array;
 
 /**
  * This class is realization of (X, Y, Z, W) vector. 
@@ -420,7 +420,7 @@ public class Vector4 extends Vector3 implements Vector
 		// margin to distinguish between 0 and 180 degrees
 		double epsilon2 = 0.1;		
 
-		Float32Array te = m.getArray();
+		Float64Array te = m.getArray();
 
 		double m11 = te.get(0), m12 = te.get(4), m13 = te.get(8);
 		double m21 = te.get(1), m22 = te.get(5), m23 = te.get(9);

@@ -32,8 +32,6 @@ import thothbot.parallax.core.client.gl2.WebGLFramebuffer;
 import thothbot.parallax.core.client.gl2.WebGLProgram;
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
 import thothbot.parallax.core.client.gl2.WebGLUniformLocation;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
-import thothbot.parallax.core.client.gl2.arrays.Int16Array;
 import thothbot.parallax.core.client.gl2.enums.BeginMode;
 import thothbot.parallax.core.client.gl2.enums.BlendEquationMode;
 import thothbot.parallax.core.client.gl2.enums.BlendingFactorDest;
@@ -107,6 +105,9 @@ import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.Int16Array;
 
 /**
  * The WebGL renderer displays your beautifully crafted {@link Scene}s using WebGL, if your device supports it.
@@ -778,9 +779,9 @@ public class WebGLRenderer implements HasEventBus
 		// load updated influences uniform
 		if( uniforms.get("morphTargetInfluences").getLocation() != null ) 
 		{
-			Float32Array vals = object.__webglMorphTargetInfluences;
-			double[] val2 = new double[vals.getLength()];
-			for (int i = 0; i < vals.getLength(); i++) 
+			Float64Array vals = object.__webglMorphTargetInfluences;
+			double[] val2 = new double[vals.length()];
+			for (int i = 0; i < vals.length(); i++) 
 			{
 			    Double f = vals.get(i);
 			    val2[i] = (f != null ? f : Double.NaN); // Or whatever default you want.
@@ -1236,19 +1237,19 @@ public class WebGLRenderer implements HasEventBus
 				{
 					// vertices
 
-					Float32Array position = geometryBuffer.getWebGlVertexArray();
-					int positionSize = position.getLength();
+					Float64Array position = geometryBuffer.getWebGlVertexArray();
+					int positionSize = position.length();
 
 					gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglVertexBuffer );
 					gl.vertexAttribPointer( attributes.get("position"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 ); // 4 bytes per Float32
 
 					// normals
 
-					Float32Array normal = geometryBuffer.getWebGlNormalArray();
+					Float64Array normal = geometryBuffer.getWebGlNormalArray();
 
 					if ( attributes.get("normal") >= 0 && normal != null ) 
 					{
-						int normalSize = normal.getLength();
+						int normalSize = normal.length();
 
 						gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglNormalBuffer );
 						gl.vertexAttribPointer( attributes.get("normal"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 );
@@ -1256,13 +1257,13 @@ public class WebGLRenderer implements HasEventBus
 
 					// uvs
 
-					Float32Array uv = geometryBuffer.getWebGlUvArray();
+					Float64Array uv = geometryBuffer.getWebGlUvArray();
 
 					if ( attributes.get("uv") >= 0 && uv != null ) 
 					{
 						if ( geometryBuffer.__webglUVBuffer != null ) 
 						{
-							int uvSize = uv.getLength();
+							int uvSize = uv.length();
 
 							gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglUVBuffer );
 							gl.vertexAttribPointer( attributes.get("uv"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 );
@@ -1278,11 +1279,11 @@ public class WebGLRenderer implements HasEventBus
 
 					// colors
 
-					Float32Array color = geometryBuffer.getWebGlColorArray();
+					Float64Array color = geometryBuffer.getWebGlColorArray();
 
 					if ( attributes.get("color") >= 0 && color != null ) 
 					{
-						int colorSize = color.getLength();
+						int colorSize = color.length();
 
 						gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglColorBuffer );
 						gl.vertexAttribPointer( attributes.get("color"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 );
@@ -1290,11 +1291,11 @@ public class WebGLRenderer implements HasEventBus
 
 					// tangents
 
-					Float32Array tangent = geometryBuffer.getWebGlTangentArray();
+					Float64Array tangent = geometryBuffer.getWebGlTangentArray();
 
 					if ( attributes.get("tangent") >= 0 && tangent != null )
 					{
-						int tangentSize = tangent.getLength();
+						int tangentSize = tangent.length();
 
 						gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglTangentBuffer );
 						gl.vertexAttribPointer( attributes.get("tangent"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 );
@@ -1323,19 +1324,19 @@ public class WebGLRenderer implements HasEventBus
 //			{
 				// vertices
 
-				Float32Array position = geometryBuffer.getWebGlVertexArray();
-				int positionSize = position.getLength();
+				Float64Array position = geometryBuffer.getWebGlVertexArray();
+				int positionSize = position.length();
 
 				gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglVertexBuffer );
 				gl.vertexAttribPointer( attributes.get("position"), 3, DataType.FLOAT, false, 0, 0 );
 
 				// colors
 
-				Float32Array color = geometryBuffer.getWebGlColorArray();
+				Float64Array color = geometryBuffer.getWebGlColorArray();
 
 				if ( attributes.get("color") >= 0 && color != null ) 
 				{
-					int colorSize = color.getLength();
+					int colorSize = color.length();
 
 					gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglColorBuffer );
 					gl.vertexAttribPointer( attributes.get("color"), 3, DataType.FLOAT, false, 0, 0 );
@@ -1343,10 +1344,10 @@ public class WebGLRenderer implements HasEventBus
 
 				// render particles
 
-				gl.drawArrays( BeginMode.POINTS, 0, position.getLength() / 3 );
+				gl.drawArrays( BeginMode.POINTS, 0, position.length() / 3 );
 
 				getInfo().getRender().calls ++;
-				getInfo().getRender().points += position.getLength() / 3;
+				getInfo().getRender().points += position.length() / 3;
 //			}
 		}
 	}
@@ -1500,7 +1501,7 @@ public class WebGLRenderer implements HasEventBus
 		{
 			if ( object instanceof Mesh && ((Mesh)object).__webglMorphTargetInfluences == null ) 
 			{
-				((Mesh)object).__webglMorphTargetInfluences = Float32Array.create( this.maxMorphTargets );
+				((Mesh)object).__webglMorphTargetInfluences = Float64ArrayNative.create( this.maxMorphTargets );
 			}
 		}
 
@@ -1647,8 +1648,8 @@ public class WebGLRenderer implements HasEventBus
 					shadowMapSize.add(shadowLight.getShadowMapSize() );
 					shadowMatrix.add(shadowLight.getShadowMatrix() );
 
-					((Float32Array)uniforms.get("shadowDarkness").getValue()).set( j, shadowLight.getShadowDarkness() );
-					((Float32Array)uniforms.get("shadowBias").getValue()).set( j, shadowLight.getShadowBias() );
+					((Float64Array)uniforms.get("shadowDarkness").getValue()).set( j, shadowLight.getShadowDarkness() );
+					((Float64Array)uniforms.get("shadowBias").getValue()).set( j, shadowLight.getShadowBias() );
 					j++;
 				}
 			}
@@ -1714,17 +1715,17 @@ public class WebGLRenderer implements HasEventBus
 			}
 			else if(type == TYPE.FV1) // flat array of floats (JS or typed array)
 			{
-				gl.uniform1fv( location, (Float32Array)value );
+				gl.uniform1fv( location, (Float64Array)value );
 			}
 			else if(type == TYPE.FV) // flat array of floats with 3 x N size (JS or typed array)
 			{ 
-				gl.uniform3fv( location, (Float32Array) value );
+				gl.uniform3fv( location, (Float64Array) value );
 			}
 			else if(type == TYPE.V2V) // List of Vector2
 			{ 
 				List<Vector2> listVector2f = (List<Vector2>) value;
 				if ( uniform.getCacheArray() == null )
-					uniform.setCacheArray( Float32Array.create( 2 * listVector2f.size() ) );
+					uniform.setCacheArray( Float64ArrayNative.create( 2 * listVector2f.size() ) );
 
 				for ( int i = 0, il = listVector2f.size(); i < il; i ++ ) 
 				{
@@ -1740,7 +1741,7 @@ public class WebGLRenderer implements HasEventBus
 			{
 				List<Vector3> listVector3f = (List<Vector3>) value;
 				if ( uniform.getCacheArray() == null )
-					uniform.setCacheArray( Float32Array.create( 3 * listVector3f.size() ) );
+					uniform.setCacheArray( Float64ArrayNative.create( 3 * listVector3f.size() ) );
 
 				for ( int i = 0, il = listVector3f.size(); i < il; i ++ ) 
 				{
@@ -1757,7 +1758,7 @@ public class WebGLRenderer implements HasEventBus
 			{
 				List<Vector4> listVector4f = (List<Vector4>) value;
 				if ( uniform.getCacheArray() == null)
-					uniform.setCacheArray( Float32Array.create( 4 * listVector4f.size() ) );
+					uniform.setCacheArray( Float64ArrayNative.create( 4 * listVector4f.size() ) );
 
 
 				for ( int i = 0, il = listVector4f.size(); i < il; i ++ ) 
@@ -1776,7 +1777,7 @@ public class WebGLRenderer implements HasEventBus
 			{
 				Matrix4 matrix4 = (Matrix4) value;
 				if ( uniform.getCacheArray() == null )
-					uniform.setCacheArray( Float32Array.create( 16 ) );
+					uniform.setCacheArray( Float64ArrayNative.create( 16 ) );
 
 				matrix4.flattenToArray( uniform.getCacheArray() );
 				gl.uniformMatrix4fv( location, false, uniform.getCacheArray() );
@@ -1785,7 +1786,7 @@ public class WebGLRenderer implements HasEventBus
 			{
 				List<Matrix4> listMatrix4f = (List<Matrix4>) value;
 				if ( uniform.getCacheArray() == null )
-					uniform.setCacheArray( Float32Array.create( 16 * listMatrix4f.size() ) );
+					uniform.setCacheArray( Float64ArrayNative.create( 16 * listMatrix4f.size() ) );
 
 				for ( int i = 0, il = listMatrix4f.size(); i < il; i ++ )
 					listMatrix4f.get( i ).flattenToArray( uniform.getCacheArray(), i * 16 );

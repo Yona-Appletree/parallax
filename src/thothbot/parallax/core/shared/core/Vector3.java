@@ -18,8 +18,7 @@
 
 package thothbot.parallax.core.shared.core;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
-
+import com.google.gwt.typedarrays.shared.Float64Array;
 
 /**
  * This class is realization of (X, Y, Z) vector. 
@@ -377,7 +376,7 @@ public class Vector3 extends Vector2 implements Vector
 
 	public Vector3 setEulerFromRotationMatrix( Matrix4 m, Euler order ) 
 	{
-		Float32Array te = m.getArray();
+		Float64Array te = m.getArray();
 		double m11 = te.get(0), m12 = te.get(4), m13 = te.get(8);
 		double m21 = te.get(1), m22 = te.get(5), m23 = te.get(9);
 		double m31 = te.get(2), m32 = te.get(6), m33 = te.get(10);

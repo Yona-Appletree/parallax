@@ -20,7 +20,9 @@ package thothbot.parallax.core.shared.lights;
 
 import java.util.Map;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Vector3;
 import thothbot.parallax.core.shared.materials.MeshLambertMaterial;
@@ -55,24 +57,24 @@ public class SpotLight extends ShadowLight
 {
 	public static class UniformSport implements Light.UniformLight 
 	{
-		public Float32Array distances;
-		public Float32Array colors;
-		public Float32Array positions;
+		public Float64Array distances;
+		public Float64Array colors;
+		public Float64Array positions;
 		
-		public Float32Array directions;
-		public Float32Array angles;
-		public Float32Array exponents;
+		public Float64Array directions;
+		public Float64Array angles;
+		public Float64Array exponents;
 		
 		@Override
 		public void reset() 
 		{
-			this.colors    = (Float32Array) Float32Array.createArray();
-			this.distances = (Float32Array) Float32Array.createArray();
-			this.positions = (Float32Array) Float32Array.createArray();
+			this.colors    = (Float64Array) Float64ArrayNative.createArray();
+			this.distances = (Float64Array) Float64ArrayNative.createArray();
+			this.positions = (Float64Array) Float64ArrayNative.createArray();
 			
-			this.directions = (Float32Array) Float32Array.createArray();
-			this.angles     = (Float32Array) Float32Array.createArray();
-			this.exponents  = (Float32Array) Float32Array.createArray();
+			this.directions = (Float64Array) Float64ArrayNative.createArray();
+			this.angles     = (Float64Array) Float64ArrayNative.createArray();
+			this.exponents  = (Float64Array) Float64ArrayNative.createArray();
 		}
 
 		@Override
@@ -140,17 +142,17 @@ public class SpotLight extends ShadowLight
 	@Override
 	public void setupRendererLights(RendererLights zlights, boolean isGammaInput) 
 	{
-		Float32Array spotColors     = zlights.spot.colors;
-		Float32Array spotPositions  = zlights.spot.positions;
-		Float32Array spotDistances  = zlights.spot.distances;
-		Float32Array spotDirections = zlights.spot.directions;
-		Float32Array spotAngles     = zlights.spot.angles;
-		Float32Array spotExponents  = zlights.spot.exponents;
+		Float64Array spotColors     = zlights.spot.colors;
+		Float64Array spotPositions  = zlights.spot.positions;
+		Float64Array spotDistances  = zlights.spot.distances;
+		Float64Array spotDirections = zlights.spot.directions;
+		Float64Array spotAngles     = zlights.spot.angles;
+		Float64Array spotExponents  = zlights.spot.exponents;
 		
 		double intensity = getIntensity();
 		double distance =  getDistance();
 
-		int spotOffset = spotColors.getLength();
+		int spotOffset = spotColors.length();
 
 		if ( isGammaInput ) 
 			setColorGamma( spotColors, spotOffset, getColor(), intensity ); 

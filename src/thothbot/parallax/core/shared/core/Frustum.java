@@ -21,7 +21,8 @@ package thothbot.parallax.core.shared.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.shared.objects.GeometryObject;
 
 /**
@@ -56,7 +57,7 @@ public class Frustum
 	 */
 	public void setFromMatrix(Matrix4 m)
 	{
-		Float32Array me = m.getArray();
+		Float64Array me = m.getArray();
 		double me0 = me.get(0), me1 = me.get(1), me2 = me.get(2), me3 = me.get(3);
 		double me4 = me.get(4), me5 = me.get(5), me6 = me.get(6), me7 = me.get(7);
 		double me8 = me.get(8), me9 = me.get(9), me10 = me.get(10), me11 = me.get(11);
@@ -84,7 +85,7 @@ public class Frustum
 	public boolean contains(GeometryObject object)
 	{
 		Matrix4 matrix = object.getMatrixWorld();
-		Float32Array me = matrix.getArray();
+		Float64Array me = matrix.getArray();
 		double radius = object.getGeometryBuffer() != null ?   
 				-object.getGeometryBuffer().getBoundingSphere().radius * matrix.getMaxScaleOnAxis() :
 				-object.getGeometry().getBoundingSphere().radius * matrix.getMaxScaleOnAxis();

@@ -18,12 +18,6 @@
 
 package thothbot.parallax.core.client.gl2;
 
-import thothbot.parallax.core.client.gl2.arrays.ArrayBuffer;
-import thothbot.parallax.core.client.gl2.arrays.ArrayBufferView;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
-import thothbot.parallax.core.client.gl2.arrays.Int32Array;
-import thothbot.parallax.core.client.gl2.arrays.JsArrayUtil;
-import thothbot.parallax.core.client.gl2.arrays.TypeArray;
 import thothbot.parallax.core.client.gl2.enums.BeginMode;
 import thothbot.parallax.core.client.gl2.enums.BlendEquationMode;
 import thothbot.parallax.core.client.gl2.enums.BlendingFactorDest;
@@ -52,6 +46,7 @@ import thothbot.parallax.core.client.gl2.enums.StencilOp;
 import thothbot.parallax.core.client.gl2.enums.TextureParameterName;
 import thothbot.parallax.core.client.gl2.enums.TextureTarget;
 import thothbot.parallax.core.client.gl2.enums.TextureUnit;
+import thothbot.parallax.core.shared.core.JsArrayUtil;
 
 import com.google.gwt.canvas.dom.client.Context;
 import com.google.gwt.canvas.dom.client.ImageData;
@@ -64,6 +59,11 @@ import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.VideoElement;
+import com.google.gwt.typedarrays.shared.ArrayBuffer;
+import com.google.gwt.typedarrays.shared.ArrayBufferView;
+import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.Int32Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 /**
  * 
@@ -245,13 +245,13 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
   }-*/;
 
   /**
-   * @see #bufferData(BufferTarget, TypeArray, BufferUsage)
+   * @see #bufferData(BufferTarget, TypedArrays, BufferUsage)
    */
-  public void bufferData(BufferTarget target, ArrayBuffer data, BufferUsage usage) {
+  public void bufferData(BufferTarget target, ArrayBufferView data, BufferUsage usage) {
 	  bufferData(target.getValue(), data, usage.getValue());
   }
 
-  private native void bufferData(int target, ArrayBuffer data, int usage) /*-{
+  private native void bufferData(int target, ArrayBufferView data, int usage) /*-{
 		this.bufferData(target, data, usage);
   }-*/;
 
@@ -282,16 +282,16 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				store for initialization
    * @param usage Specifies the expected usage pattern of the data store.
    */
-  public void bufferData(BufferTarget target, TypeArray data, BufferUsage usage) {
+  public void bufferData(BufferTarget target, TypedArrays data, BufferUsage usage) {
 	  bufferData(target.getValue(), data, usage.getValue());
   }
 
-  private native void bufferData(int target, TypeArray data, int usage) /*-{
+  private native void bufferData(int target, TypedArrays data, int usage) /*-{
 		this.bufferData(target, data, usage);
   }-*/;
 
   /**
-   * @see #bufferSubData(BufferTarget, int, TypeArray)
+   * @see #bufferSubData(BufferTarget, int, TypedArrays)
    */
   public void bufferSubData(BufferTarget target, int offset, ArrayBuffer data) {
 	  bufferSubData(target.getValue(), offset, data);
@@ -312,11 +312,11 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param data Specifies a pointer to the new data that will be copied into 
    * 				the data store.
    */
-  public void bufferSubData(BufferTarget target, int offset, TypeArray data) {
+  public void bufferSubData(BufferTarget target, int offset, TypedArrays data) {
 	  bufferSubData(target.getValue(), offset, data);
   }
 
-  private native void bufferSubData(int target, int offset, TypeArray data) /*-{
+  private native void bufferSubData(int target, int offset, TypedArrays data) /*-{
 		this.bufferSubData(target, offset, data);
   }-*/;
 
@@ -1120,7 +1120,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				queried.
    * @return The type returned is dependent on the uniform type.
    */
-  public native <T extends thothbot.parallax.core.client.gl2.arrays.TypeArray> T getUniform(
+  public native <T extends TypedArrays> T getUniform(
       WebGLProgram program, WebGLUniformLocation location) /*-{
 		return this.getUniform(program, location);
   }-*/;
@@ -1772,7 +1772,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
   }-*/;
 
   public native void texSubImage2D(int target, int level, int xoffset, int yoffset, int width,
-      int height, int format, int type, TypeArray data) /*-{
+      int height, int format, int type, TypedArrays data) /*-{
 		this.texSubImage2D(target, level, xoffset, yoffset, width, height,
 				format, type, data);
   }-*/;
@@ -1837,7 +1837,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				error will be raised.
    * @param v
    */
-  public native void uniform1fv(WebGLUniformLocation location, Float32Array v) /*-{
+  public native void uniform1fv(WebGLUniformLocation location, Float64Array v) /*-{
 		this.uniform1fv(location, v);
   }-*/;
 
@@ -1922,7 +1922,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				error will be raised.
    * @param v
    */
-  public native void uniform2fv(WebGLUniformLocation location, Float32Array v) /*-{
+  public native void uniform2fv(WebGLUniformLocation location, Float64Array v) /*-{
 		this.uniform2fv(location, v);
   }-*/;
 
@@ -2021,7 +2021,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				error will be raised.
    * @param v
    */
-  public native void uniform3fv(WebGLUniformLocation location, Float32Array v) /*-{
+  public native void uniform3fv(WebGLUniformLocation location, Float64Array v) /*-{
 		this.uniform3fv(location, v);
   }-*/;
 
@@ -2122,7 +2122,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				error will be raised.
    * @param v
    */
-  public native void uniform4fv(WebGLUniformLocation location, Float32Array v) /*-{
+  public native void uniform4fv(WebGLUniformLocation location, Float64Array v) /*-{
 		this.uniform4fv(location, v);
   }-*/;
 
@@ -2212,7 +2212,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param value
    */
   public native void uniformMatrix2fv(WebGLUniformLocation location, boolean transpose,
-      Float32Array value) /*-{
+      Float64Array value) /*-{
 		this.uniformMatrix2fv(location, transpose, value);
   }-*/;
 
@@ -2253,7 +2253,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param value
    */
   public native void uniformMatrix3fv(WebGLUniformLocation location, boolean transpose,
-      Float32Array value) /*-{
+      Float64Array value) /*-{
 		this.uniformMatrix3fv(location, transpose, value);
   }-*/;
 
@@ -2294,7 +2294,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param value
    */
   public native void uniformMatrix4fv(WebGLUniformLocation location, boolean transpose,
-      Float32Array value) /*-{
+      Float64Array value) /*-{
 		this.uniformMatrix4fv(location, transpose, value);
   }-*/;
 
@@ -2363,7 +2363,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param values Specifies the new values to be used for the specified vertex 
    * 				attribute.
    */
-  public native void vertexAttrib1fv(int index, Float32Array values) /*-{
+  public native void vertexAttrib1fv(int index, Float64Array values) /*-{
 		this.vertexAttrib1fv(index, values);
   }-*/;
 
@@ -2413,7 +2413,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param values Specifies the new values to be used for the specified vertex 
    * 				attribute.
    */
-  public native void vertexAttrib2fv(int index, Float32Array values) /*-{
+  public native void vertexAttrib2fv(int index, Float64Array values) /*-{
 		this.vertexAttrib2fv(index, values);
   }-*/;
   
@@ -2465,7 +2465,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param values Specifies the new values to be used for the specified vertex 
    * 				attribute.
    */
-  public native void vertexAttrib3fv(int index, Float32Array values) /*-{
+  public native void vertexAttrib3fv(int index, Float64Array values) /*-{
 		this.vertexAttrib3fv(index, values);
   }-*/;
 
@@ -2519,7 +2519,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param values Specifies the new values to be used for the specified vertex 
    * 				attribute.
    */
-  public native void vertexAttrib4fv(int index, Float32Array values) /*-{
+  public native void vertexAttrib4fv(int index, Float64Array values) /*-{
 		this.vertexAttrib4fv(index, values);
   }-*/;
 

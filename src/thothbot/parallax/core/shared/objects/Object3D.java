@@ -22,8 +22,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.client.gl2.WebGLBuffer;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
 import thothbot.parallax.core.shared.Log;
 import thothbot.parallax.core.shared.core.Euler;
 import thothbot.parallax.core.shared.core.Matrix3;
@@ -97,13 +98,13 @@ public class Object3D implements DimensionalObject
 	public boolean hasNormal;
 	public double renderDepth;
 	public Matrix4 identityMatrix;
-	public Float32Array positionArray;
-	public Float32Array normalArray;
+	public Float64Array positionArray;
+	public Float64Array normalArray;
 	public WebGLBuffer __webglVertexBuffer;
 	public WebGLBuffer __webglNormalBuffer;
 	public boolean isWebglActive;
 	public boolean isWebglInit;
-	public Float32Array _modelMatrixArray;
+	public Float64Array _modelMatrixArray;
 	public Object _modelViewMatrixArray;
 	public Object _normalMatrixArray;
 	public Matrix3 _normalMatrix;

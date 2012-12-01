@@ -21,11 +21,13 @@ package thothbot.parallax.core.shared.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.Int16Array;
+import com.google.gwt.typedarrays.shared.Uint16Array;
+
 import thothbot.parallax.core.client.gl2.WebGLBuffer;
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
-import thothbot.parallax.core.client.gl2.arrays.Int16Array;
-import thothbot.parallax.core.client.gl2.arrays.Uint16Array;
 import thothbot.parallax.core.client.gl2.enums.BufferTarget;
 import thothbot.parallax.core.client.gl2.enums.BufferUsage;
 import thothbot.parallax.core.client.shaders.Attribute;
@@ -70,12 +72,12 @@ public class GeometryBuffer implements Geometric
 	private Uint16Array webGlFaceArray;
 	private Uint16Array webGlLineArray;
 	
-	private Float32Array webGlColorArray;
-	private Float32Array webGlVertexArray;
-	private Float32Array webGlNormalArray;
-	private Float32Array webGlTangentArray;
-	private Float32Array webGlUvArray;
-	private Float32Array webGlUv2Array;
+	private Float64Array webGlColorArray;
+	private Float64Array webGlVertexArray;
+	private Float64Array webGlNormalArray;
+	private Float64Array webGlTangentArray;
+	private Float64Array webGlUvArray;
+	private Float64Array webGlUv2Array;
 	
 	public WebGLBuffer __webglIndexBuffer;
 	public WebGLBuffer __webglFaceBuffer;
@@ -226,62 +228,62 @@ public class GeometryBuffer implements Geometric
 		this.isArrayInitialized = isArrayInitialized;
 	}
 	
-	public Float32Array getWebGlVertexArray()
+	public Float64Array getWebGlVertexArray()
 	{
 		return this.webGlVertexArray;
 	}
 	
-	public Float32Array getWebGlColorArray()
+	public Float64Array getWebGlColorArray()
 	{
 		return this.webGlColorArray;
 	}
 	
-	public void setWebGlColorArray(Float32Array a)
+	public void setWebGlColorArray(Float64Array a)
 	{
 		this.webGlColorArray = a;
 	}
 	
-	public void setWebGlVertexArray(Float32Array a)
+	public void setWebGlVertexArray(Float64Array a)
 	{
 		this.webGlVertexArray = a;
 	}
 	
-	public void setWebGlNormalArray(Float32Array a)
+	public void setWebGlNormalArray(Float64Array a)
 	{
 		this.webGlNormalArray = a;
 	}
 	
-	public void setWebGlTangentArray(Float32Array a)
+	public void setWebGlTangentArray(Float64Array a)
 	{
 		this.webGlTangentArray = a;
 	}
 	
-	public void setWebGlUvArray(Float32Array a)
+	public void setWebGlUvArray(Float64Array a)
 	{
 		this.webGlUvArray = a;
 	}
 	
-	public void setWebGlUv2Array(Float32Array a)
+	public void setWebGlUv2Array(Float64Array a)
 	{
 		this.webGlUv2Array = a;
 	}
 	
-	public Float32Array getWebGlNormalArray() 
+	public Float64Array getWebGlNormalArray() 
 	{
 		return webGlNormalArray;
 	}
 
-	public Float32Array getWebGlTangentArray() 
+	public Float64Array getWebGlTangentArray() 
 	{
 		return webGlTangentArray;
 	}
 
-	public Float32Array getWebGlUvArray() 
+	public Float64Array getWebGlUvArray() 
 	{
 		return webGlUvArray;
 	}
 
-	public Float32Array getWebGlUv2Array() 
+	public Float64Array getWebGlUv2Array() 
 	{
 		return webGlUv2Array;
 	}
@@ -346,11 +348,11 @@ public class GeometryBuffer implements Geometric
 		
 		BoundingBox boundingBox = getBoundingBox();
 
-		Float32Array positions = getWebGlVertexArray();
+		Float64Array positions = getWebGlVertexArray();
 
 		if ( positions != null) 
 		{
-			for ( int i = 0, il = positions.getLength(); i < il; i += 3 ) 
+			for ( int i = 0, il = positions.length(); i < il; i += 3 ) 
 			{
 				double x = positions.get( i );
 				double y = positions.get( i + 1 );
@@ -390,7 +392,7 @@ public class GeometryBuffer implements Geometric
 			}
 		}
 
-		if ( positions == null || positions.getLength() == 0 ) 
+		if ( positions == null || positions.length() == 0 ) 
 		{
 			this.boundingBox.min.set( 0, 0, 0 );
 			this.boundingBox.max.set( 0, 0, 0 );
@@ -402,13 +404,13 @@ public class GeometryBuffer implements Geometric
 	{
 		if ( getBoundingSphere() == null ) 
 			setBoundingSphere( new BoundingSphere(0) );
-		Float32Array positions = getWebGlVertexArray();
+		Float64Array positions = getWebGlVertexArray();
 
 		if ( positions != null) 
 		{
 			double maxRadiusSq = 0;
 
-			for ( int i = 0, il = positions.getLength(); i < il; i += 3 ) 
+			for ( int i = 0, il = positions.length(); i < il; i += 3 ) 
 			{
 				double x = positions.get( i );
 				double y = positions.get( i + 1 );
@@ -428,17 +430,17 @@ public class GeometryBuffer implements Geometric
 	{
 		if ( getWebGlVertexArray() != null && getWebGlIndexArray() != null ) 
 		{
-			int nVertexElements = getWebGlVertexArray().getLength();
+			int nVertexElements = getWebGlVertexArray().length();
 
 			if ( getWebGlNormalArray() == null ) 
 			{
-				setWebGlNormalArray(Float32Array.create(nVertexElements));
+				setWebGlNormalArray(Float64ArrayNative.create(nVertexElements));
 			}
 			else 
 			{
 				// reset existing normals to zero
 
-				for ( int i = 0, il = getWebGlNormalArray().getLength(); i < il; i ++ ) 
+				for ( int i = 0, il = getWebGlNormalArray().length(); i < il; i ++ ) 
 				{
 					getWebGlNormalArray().set( i, 0 );
 				}
@@ -447,8 +449,8 @@ public class GeometryBuffer implements Geometric
 			List<GeometryBuffer.Offset> offsets = this.offsets;
 
 			Int16Array indices = getWebGlIndexArray();
-			Float32Array positions = getWebGlVertexArray();
-			Float32Array normals = getWebGlNormalArray();
+			Float64Array positions = getWebGlVertexArray();
+			Float64Array normals = getWebGlNormalArray();
 
 			Vector3 pA = new Vector3();
 			Vector3 pB = new Vector3();
@@ -506,7 +508,7 @@ public class GeometryBuffer implements Geometric
 
 			// normalize normals
 
-			for ( int i = 0, il = normals.getLength(); i < il; i += 3 ) 
+			for ( int i = 0, il = normals.length(); i < il; i += 3 ) 
 			{
 				double x = normals.get( i );
 				double y = normals.get( i + 1 );
@@ -540,20 +542,20 @@ public class GeometryBuffer implements Geometric
 		}
 
 		Int16Array indices = getWebGlIndexArray();
-		Float32Array positions = getWebGlVertexArray();
-		Float32Array normals = getWebGlNormalArray();
-		Float32Array uvs = getWebGlUvArray();
+		Float64Array positions = getWebGlVertexArray();
+		Float64Array normals = getWebGlNormalArray();
+		Float64Array uvs = getWebGlUvArray();
 
-		int nVertices = positions.getLength() / 3;
+		int nVertices = positions.length() / 3;
 
 		if ( getWebGlTangentArray() == null ) 
 		{
 			int nTangentElements = 4 * nVertices;
 
-			setWebGlTangentArray(Float32Array.create(nTangentElements));
+			setWebGlTangentArray(Float64ArrayNative.create(nTangentElements));
 		}
 
-		Float32Array tangents = getWebGlTangentArray();
+		Float64Array tangents = getWebGlTangentArray();
 
 		List<Vector3> tan1 = new ArrayList<Vector3>();
 		List<Vector3> tan2 = new ArrayList<Vector3>();
@@ -607,8 +609,8 @@ public class GeometryBuffer implements Geometric
 	
 	private void handleTriangle( List<Vector3> tan1, List<Vector3> tan2, int a, int b, int c ) 
 	{
-		Float32Array positions = getWebGlVertexArray();
-		Float32Array uvs = getWebGlUvArray();
+		Float64Array positions = getWebGlVertexArray();
+		Float64Array uvs = getWebGlUvArray();
 		
 		double xA = positions.get( a * 3 );
 		double yA = positions.get( a * 3 + 1 );
@@ -669,8 +671,8 @@ public class GeometryBuffer implements Geometric
 	
 	private void handleVertex( List<Vector3> tan1, List<Vector3> tan2, int v ) 
 	{
-		Float32Array normals = getWebGlNormalArray();
-		Float32Array tangents = getWebGlTangentArray();
+		Float64Array normals = getWebGlNormalArray();
+		Float64Array tangents = getWebGlTangentArray();
 		
 		Vector3 n = new Vector3(
 				normals.get( v * 3 ),
@@ -702,11 +704,11 @@ public class GeometryBuffer implements Geometric
 	public void setDirectBuffers ( WebGLRenderingContext gl, BufferUsage hint, boolean dispose ) 
 	{
 		Int16Array index = getWebGlIndexArray();
-		Float32Array position = getWebGlVertexArray();
-		Float32Array normal = getWebGlNormalArray();
-		Float32Array uv = getWebGlUvArray();
-		Float32Array color = getWebGlColorArray();
-		Float32Array tangent = getWebGlTangentArray();
+		Float64Array position = getWebGlVertexArray();
+		Float64Array normal = getWebGlNormalArray();
+		Float64Array uv = getWebGlUvArray();
+		Float64Array color = getWebGlColorArray();
+		Float64Array tangent = getWebGlTangentArray();
 
 		if ( isElementsNeedUpdate() && index != null ) 
 		{

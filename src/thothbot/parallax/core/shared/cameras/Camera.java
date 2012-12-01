@@ -21,12 +21,13 @@ package thothbot.parallax.core.shared.cameras;
 import thothbot.parallax.core.client.events.HasEventBus;
 import thothbot.parallax.core.client.events.ViewportResizeEvent;
 import thothbot.parallax.core.client.events.ViewportResizeHandler;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
 import thothbot.parallax.core.shared.core.Matrix4;
 import thothbot.parallax.core.shared.core.Vector3;
 import thothbot.parallax.core.shared.objects.Object3D;
 
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
 
 /**
  * Abstract base class for cameras.
@@ -40,8 +41,8 @@ public class Camera extends Object3D implements HasEventBus, ViewportResizeHandl
 	protected Matrix4 projectionMatrix;
 	protected Matrix4 projectionMatrixInverse;
 
-	public Float32Array _viewMatrixArray;
-	public Float32Array _projectionMatrixArray;
+	public Float64Array _viewMatrixArray;
+	public Float64Array _projectionMatrixArray;
 	
 	public Camera() 
 	{
@@ -51,8 +52,8 @@ public class Camera extends Object3D implements HasEventBus, ViewportResizeHandl
 		this.projectionMatrix = new Matrix4();
 		this.projectionMatrixInverse = new Matrix4();
 		
-		this._viewMatrixArray = Float32Array.create( 16 );
-		this._projectionMatrixArray = Float32Array.create( 16 );
+		this._viewMatrixArray = Float64ArrayNative.create( 16 );
+		this._projectionMatrixArray = Float64ArrayNative.create( 16 );
 		
 		addViewportResizeHandler(this);
 	}

@@ -20,8 +20,9 @@ package thothbot.parallax.core.client.shaders;
 
 import java.util.List;
 
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.client.gl2.WebGLBuffer;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
 
 public class Attribute
 {
@@ -47,7 +48,7 @@ public class Attribute
 	private List<?> value;
 	private BOUND_TO boundTo;
 	
-	public Float32Array array;
+	public Float64Array array;
 	public boolean needsUpdate;
 	public String belongsToAttribute;
 	public Attribute __original;

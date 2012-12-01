@@ -21,7 +21,7 @@ package thothbot.parallax.core.shared.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.shared.Float64Array;
 
 public class GeometryGroup extends GeometryBuffer
 {
@@ -32,11 +32,11 @@ public class GeometryGroup extends GeometryBuffer
 
 	public int vertices;
 
-	public List<Float32Array> __morphTargetsArrays;
-	public List<Float32Array> __morphNormalsArrays;
+	public List<Float64Array> __morphTargetsArrays;
+	public List<Float64Array> __morphNormalsArrays;
 
-	private Float32Array webGlSkinIndexArray;
-	private Float32Array webGlSkinWeightArray;
+	private Float64Array webGlSkinIndexArray;
+	private Float64Array webGlSkinWeightArray;
 
 	public GeometryGroup(int materialIndex, int numMorphTargets, int numMorphNormals) 
 	{
@@ -50,22 +50,22 @@ public class GeometryGroup extends GeometryBuffer
 		this.numMorphNormals = numMorphNormals;
 	}
 
-	public Float32Array getWebGlSkinIndexArray() 
+	public Float64Array getWebGlSkinIndexArray() 
 	{
 		return webGlSkinIndexArray;
 	}
 
-	public Float32Array getWebGlSkinWeightArray() 
+	public Float64Array getWebGlSkinWeightArray() 
 	{
 		return webGlSkinWeightArray;
 	}
 	
-	public void setWebGlSkinIndexArray(Float32Array a)
+	public void setWebGlSkinIndexArray(Float64Array a)
 	{
 		this.webGlSkinIndexArray = a;
 	}
 	
-	public void setWebGlSkinWeightArray(Float32Array a)
+	public void setWebGlSkinWeightArray(Float64Array a)
 	{
 		this.webGlSkinWeightArray = a;
 	}

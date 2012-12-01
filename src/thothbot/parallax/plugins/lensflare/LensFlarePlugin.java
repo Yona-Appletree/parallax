@@ -27,8 +27,6 @@ import thothbot.parallax.core.client.gl2.WebGLBuffer;
 import thothbot.parallax.core.client.gl2.WebGLConstants;
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
 import thothbot.parallax.core.client.gl2.WebGLTexture;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
-import thothbot.parallax.core.client.gl2.arrays.Uint16Array;
 import thothbot.parallax.core.client.gl2.enums.BeginMode;
 import thothbot.parallax.core.client.gl2.enums.BufferTarget;
 import thothbot.parallax.core.client.gl2.enums.BufferUsage;
@@ -53,13 +51,17 @@ import thothbot.parallax.plugins.lensflare.shaders.LensFlareShader;
 import thothbot.parallax.plugins.lensflare.shaders.LensFlareVertexTextureShader;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.client.Uint16ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.Uint16Array;
 
 public final class LensFlarePlugin extends Plugin
 {
 
 	public class LensFlareGeometry 
 	{
-		Float32Array vertices;
+		Float64Array vertices;
 		Uint16Array faces;
 		
 		WebGLBuffer vertexBuffer;
@@ -85,8 +87,8 @@ public final class LensFlarePlugin extends Plugin
 		
 		WebGLRenderingContext gl = getRenderer().getGL();
 
-		lensFlare.vertices = Float32Array.create( 8 + 8 );
-		lensFlare.faces = Uint16Array.create( 6 );
+		lensFlare.vertices = Float64ArrayNative.create( 8 + 8 );
+		lensFlare.faces = Uint16ArrayNative.create( 6 );
 
 		int i = 0;
 		lensFlare.vertices.set( i++, -1); lensFlare.vertices.set( i++, -1);	// vertex

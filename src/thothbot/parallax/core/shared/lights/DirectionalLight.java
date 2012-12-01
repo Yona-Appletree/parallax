@@ -21,7 +21,9 @@ package thothbot.parallax.core.shared.lights;
 import java.util.List;
 import java.util.Map;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Vector3;
 import thothbot.parallax.core.shared.materials.MeshLambertMaterial;
@@ -46,14 +48,14 @@ public class DirectionalLight extends ShadowLight
 {	
 	public static class UniformDirectional implements Light.UniformLight 
 	{
-		public Float32Array colors;
-		public Float32Array positions;
+		public Float64Array colors;
+		public Float64Array positions;
 
 		@Override
 		public void reset() 
 		{
-			this.colors    = (Float32Array) Float32Array.createArray();
-			this.positions = (Float32Array) Float32Array.createArray();
+			this.colors    = (Float64Array) Float64ArrayNative.createArray();
+			this.positions = (Float64Array) Float64ArrayNative.createArray();
 			
 		}
 
@@ -204,12 +206,12 @@ public class DirectionalLight extends ShadowLight
 	@Override
 	public void setupRendererLights(RendererLights zlights, boolean isGammaInput) 
 	{
-		Float32Array dirColors     = zlights.directional.colors;
-		Float32Array dirPositions  = zlights.directional.positions;
+		Float64Array dirColors     = zlights.directional.colors;
+		Float64Array dirPositions  = zlights.directional.positions;
 
 		double intensity = getIntensity();
 
-		int dirOffset = dirColors.getLength();
+		int dirOffset = dirColors.length();
 
 		if ( isGammaInput )
 			setColorGamma( dirColors, dirOffset, getColor(), intensity ); 

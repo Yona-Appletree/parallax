@@ -18,13 +18,13 @@
 
 package thothbot.parallax.plugins.postprocessing.shaders;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
 import thothbot.parallax.core.client.shaders.Shader;
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Vector2;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
 
 /**
  * Convolution shader
@@ -58,6 +58,6 @@ public final class ConvolutionShader extends Shader
 	{
 		this.addUniform("tDiffuse", new Uniform(Uniform.TYPE.T ));
 		this.addUniform("uImageIncrement", new Uniform(Uniform.TYPE.V2, new Vector2(0.001953125, 0.0)));
-		this.addUniform("cKernel", new Uniform(Uniform.TYPE.FV1, Float32Array.createArray()));
+		this.addUniform("cKernel", new Uniform(Uniform.TYPE.FV1, Float64ArrayNative.createArray()));
 	}
 }

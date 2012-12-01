@@ -20,9 +20,10 @@ package thothbot.parallax.core.shared.objects;
 
 import java.util.List;
 
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+
 import thothbot.parallax.core.client.gl2.WebGLConstants;
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
 import thothbot.parallax.core.client.gl2.enums.BeginMode;
 import thothbot.parallax.core.client.gl2.enums.BufferTarget;
 import thothbot.parallax.core.client.gl2.enums.BufferUsage;
@@ -92,8 +93,8 @@ public class Ribbon extends GeometryObject
 	{
 		int nvertices = geometry.getVertices().size();
 
-		geometry.setWebGlVertexArray( Float32Array.create( nvertices * 3 ) );
-		geometry.setWebGlVertexArray( Float32Array.create( nvertices * 3 ) );
+		geometry.setWebGlVertexArray( Float64ArrayNative.create( nvertices * 3 ) );
+		geometry.setWebGlVertexArray( Float64ArrayNative.create( nvertices * 3 ) );
 
 		geometry.__webglVertexCount = nvertices;
 	}

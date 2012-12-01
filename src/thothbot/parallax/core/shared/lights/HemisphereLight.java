@@ -20,7 +20,9 @@ package thothbot.parallax.core.shared.lights;
 
 import java.util.Map;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Color;
 import thothbot.parallax.core.shared.core.Vector3;
@@ -29,16 +31,16 @@ public final class HemisphereLight extends Light
 {
 	public static class UniformHemisphere implements Light.UniformLight 
 	{
-		public Float32Array skyColors;
-		public Float32Array groundColors;
-		public Float32Array positions;
+		public Float64Array skyColors;
+		public Float64Array groundColors;
+		public Float64Array positions;
 		
 		@Override
 		public void reset() 
 		{
-			this.skyColors    = (Float32Array) Float32Array.createArray();
-			this.groundColors = (Float32Array) Float32Array.createArray();
-			this.positions = (Float32Array) Float32Array.createArray();
+			this.skyColors    = (Float64Array) Float64ArrayNative.createArray();
+			this.groundColors = (Float64Array) Float64ArrayNative.createArray();
+			this.positions = (Float64Array) Float64ArrayNative.createArray();
 			
 		}
 
@@ -90,15 +92,15 @@ public final class HemisphereLight extends Light
 	@Override
 	public void setupRendererLights(RendererLights zlights, boolean isGammaInput) 
 	{
-		Float32Array hemiSkyColors    = zlights.hemi.skyColors;
-		Float32Array hemiGroundColors = zlights.hemi.groundColors;
-		Float32Array hemiPositions    = zlights.hemi.positions;
+		Float64Array hemiSkyColors    = zlights.hemi.skyColors;
+		Float64Array hemiGroundColors = zlights.hemi.groundColors;
+		Float64Array hemiPositions    = zlights.hemi.positions;
 		
 		Color skyColor = getColor();
 		Color groundColor = getGroundColor();
 		double intensity = getIntensity();
 
-		int hemiOffset = hemiSkyColors.getLength() * 3;
+		int hemiOffset = hemiSkyColors.length() * 3;
 
 		if (  isGammaInput ) 
 		{

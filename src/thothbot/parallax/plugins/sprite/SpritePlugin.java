@@ -23,10 +23,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.client.Uint16ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.Uint16Array;
+
 import thothbot.parallax.core.client.gl2.WebGLBuffer;
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
-import thothbot.parallax.core.client.gl2.arrays.Uint16Array;
 import thothbot.parallax.core.client.gl2.enums.BeginMode;
 import thothbot.parallax.core.client.gl2.enums.BufferTarget;
 import thothbot.parallax.core.client.gl2.enums.BufferUsage;
@@ -45,7 +48,7 @@ public final class SpritePlugin extends Plugin
 {
 	private class SpriteGeometry 
 	{
-		Float32Array vertices;
+		Float64Array vertices;
 		Uint16Array faces;
 		
 		WebGLBuffer vertexBuffer;
@@ -67,8 +70,8 @@ public final class SpritePlugin extends Plugin
 		
 		WebGLRenderingContext gl = getRenderer().getGL();
 		
-		sprite.vertices = Float32Array.create( 8 + 8 );
-		sprite.faces = Uint16Array.create( 6 );
+		sprite.vertices = Float64ArrayNative.create( 8 + 8 );
+		sprite.faces = Uint16ArrayNative.create( 6 );
 		
 		int i = 0;
 

@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+
 import thothbot.parallax.core.client.textures.Texture;
 import thothbot.parallax.core.shared.core.Color;
 import thothbot.parallax.core.shared.core.Matrix4;
@@ -98,25 +99,25 @@ public class UniformsLib
 	{
 		Map<String, Uniform> retval = new HashMap<String, Uniform>();
 
-		retval.put("ambientLightColor", new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
+		retval.put("ambientLightColor", new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
 
-		retval.put("directionalLightDirection", new Uniform(Uniform.TYPE.FV, Float32Array.createArray() ));
-		retval.put("directionalLightColor",     new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
+		retval.put("directionalLightDirection", new Uniform(Uniform.TYPE.FV, Float64ArrayNative.createArray() ));
+		retval.put("directionalLightColor",     new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
 
-		retval.put("hemisphereLightPosition",    new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
-		retval.put("hemisphereLightSkyColor",    new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
-		retval.put("hemisphereLightGroundColor", new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
+		retval.put("hemisphereLightPosition",    new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
+		retval.put("hemisphereLightSkyColor",    new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
+		retval.put("hemisphereLightGroundColor", new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
 		
-		retval.put("pointLightColor",    new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
-		retval.put("pointLightPosition", new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
-		retval.put("pointLightDistance", new Uniform(Uniform.TYPE.FV1,  Float32Array.createArray() ));
+		retval.put("pointLightColor",    new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
+		retval.put("pointLightPosition", new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
+		retval.put("pointLightDistance", new Uniform(Uniform.TYPE.FV1,  Float64ArrayNative.createArray() ));
 
-		retval.put("spotLightColor",     new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
-		retval.put("spotLightPosition",  new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
-		retval.put("spotLightDirection", new Uniform(Uniform.TYPE.FV,  Float32Array.createArray() ));
-		retval.put("spotLightDistance",  new Uniform(Uniform.TYPE.FV1,  Float32Array.createArray() ));
-		retval.put("spotLightAngle",     new Uniform(Uniform.TYPE.FV1,  Float32Array.createArray() ));
-		retval.put("spotLightExponent",  new Uniform(Uniform.TYPE.FV1,  Float32Array.createArray() ));
+		retval.put("spotLightColor",     new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
+		retval.put("spotLightPosition",  new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
+		retval.put("spotLightDirection", new Uniform(Uniform.TYPE.FV,  Float64ArrayNative.createArray() ));
+		retval.put("spotLightDistance",  new Uniform(Uniform.TYPE.FV1,  Float64ArrayNative.createArray() ));
+		retval.put("spotLightAngle",     new Uniform(Uniform.TYPE.FV1,  Float64ArrayNative.createArray() ));
+		retval.put("spotLightExponent",  new Uniform(Uniform.TYPE.FV1,  Float64ArrayNative.createArray() ));
 		
 		return retval;
 	}
@@ -146,8 +147,8 @@ public class UniformsLib
 
 		retval.put("shadowMap",      new Uniform(Uniform.TYPE.TV, new ArrayList<Texture>() ));
 		retval.put("shadowMapSize",  new Uniform(Uniform.TYPE.V2V, new ArrayList<Vector2>() ));
-		retval.put("shadowBias",     new Uniform(Uniform.TYPE.FV1,  Float32Array.createArray() ));
-		retval.put("shadowDarkness", new Uniform(Uniform.TYPE.FV1,  Float32Array.createArray() ));
+		retval.put("shadowBias",     new Uniform(Uniform.TYPE.FV1,  Float64ArrayNative.createArray() ));
+		retval.put("shadowDarkness", new Uniform(Uniform.TYPE.FV1,  Float64ArrayNative.createArray() ));
 			
 		retval.put("shadowMatrix", new Uniform(Uniform.TYPE.M4V,  new ArrayList<Matrix4>() ));
 		

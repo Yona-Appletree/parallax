@@ -18,7 +18,9 @@
 
 package thothbot.parallax.core.shared.core;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.shared.Log;
 
 /**
@@ -38,14 +40,14 @@ import thothbot.parallax.core.shared.Log;
  */
 public class Matrix3
 {
-	private Float32Array elements;
+	private Float64Array elements;
 
 	/**
 	 * Default constructor will make empty three-dimensional matrix.
 	 */
 	public Matrix3() 
 	{
-		this.elements = Float32Array.create(9);
+		this.elements = Float64ArrayNative.create(9);
 	}
 	
 
@@ -61,7 +63,7 @@ public class Matrix3
 	 * 
 	 * @return the Array
 	 */
-	public Float32Array getArray() 
+	public Float64Array getArray() 
 	{
 		return elements;
 	}
@@ -76,7 +78,7 @@ public class Matrix3
 	{
 		// input: THREE.Matrix4
 		// ( based on http://code.google.com/p/webgl-mjs/ )
-		Float32Array me = m.getArray();
+		Float64Array me = m.getArray();
 
 		double a11 = me.get(10) * me.get(5) - me.get(6) * me.get(9);
 		double a21 = -me.get(10) * me.get(1) + me.get(2) * me.get(9);
@@ -115,7 +117,7 @@ public class Matrix3
 	public void transpose()
 	{
 		double tmp;
-		Float32Array m = this.getArray();
+		Float64Array m = this.getArray();
 
 		tmp = m.get(1);
 		m.set(1, m.get(3));
@@ -136,10 +138,10 @@ public class Matrix3
 	 * 
 	 * @return an array of new transposed matrix.
 	 */
-	public Float32Array transposeIntoArray()
+	public Float64Array transposeIntoArray()
 	{
-		Float32Array r = Float32Array.create(9);
-		Float32Array m = this.getArray();
+		Float64Array r = Float64ArrayNative.create(9);
+		Float64Array m = this.getArray();
 
 		r.set(0, m.get(0));
 		r.set(1, m.get(3));
@@ -162,7 +164,7 @@ public class Matrix3
 	{
 		String retval = "[";
 		
-		for(int i = 0; i < this.getArray().getLength(); i++)
+		for(int i = 0; i < this.getArray().length(); i++)
 			retval += this.getArray().get(i) + ", ";
 		
 		return retval + "]";

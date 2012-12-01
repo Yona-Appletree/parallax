@@ -21,8 +21,10 @@ package thothbot.parallax.core.shared.objects;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.google.gwt.typedarrays.client.Float32ArrayNative;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
 import thothbot.parallax.core.client.renderers.WebGLRenderer;
 import thothbot.parallax.core.client.shaders.Attribute;
 import thothbot.parallax.core.shared.core.Geometry;
@@ -144,7 +146,7 @@ public abstract class GeometryObject extends Object3D implements DimensionalObje
 
 					attribute.size = size;
 
-					attribute.array = Float32Array.create( nvertices * size );
+					attribute.array = Float64ArrayNative.create( nvertices * size );
 
 					attribute.buffer = gl.createBuffer();
 					attribute.belongsToAttribute = a;

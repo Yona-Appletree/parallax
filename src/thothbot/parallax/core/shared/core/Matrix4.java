@@ -18,7 +18,8 @@
 
 package thothbot.parallax.core.shared.core;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
 
 /**
  * This class implements three-dimensional matrix. NxN, where N=4.
@@ -38,7 +39,7 @@ import thothbot.parallax.core.client.gl2.arrays.Float32Array;
  */
 public class Matrix4
 {
-	private Float32Array elements;
+	private Float64Array elements;
 
 	/**
 	 * The first matrix column
@@ -70,7 +71,7 @@ public class Matrix4
 	 */
 	public Matrix4() 
 	{
-		this.elements = Float32Array.create(16);
+		this.elements = Float64ArrayNative.create(16);
 		identity();
 	}
 
@@ -91,7 +92,7 @@ public class Matrix4
 			double n31, double n32, double n33, double n34, 
 			double n41, double n42, double n43, double n44) 
 	{
-		this.elements = Float32Array.create(16);
+		this.elements = Float64ArrayNative.create(16);
 		set(
 			n11, n12, n13, n14,
 			n21, n22, n23, n24,
@@ -114,7 +115,7 @@ public class Matrix4
 	 * 
 	 * @return the Array
 	 */
-	public Float32Array getArray() 
+	public Float64Array getArray() 
 	{
 		return elements;
 	}
@@ -220,7 +221,7 @@ public class Matrix4
 	 */
 	public Matrix4 copy(Matrix4 m)
 	{
-		Float32Array me = m.getArray();
+		Float64Array me = m.getArray();
 		return set(
 			me.get(0), me.get(4), me.get(8),  me.get(12), 
 			me.get(1), me.get(5), me.get(9),  me.get(13), 
@@ -240,8 +241,8 @@ public class Matrix4
 	 */
 	public Matrix4 multiply(Matrix4 m1, Matrix4 m2)
 	{
-		Float32Array ae = m1.getArray();
-		Float32Array be = m2.getArray();
+		Float64Array ae = m1.getArray();
+		Float64Array be = m2.getArray();
 
 		double a11 = ae.get(0), a12 = ae.get(4), a13 = ae.get(8), a14 = ae.get(12);
 		double a21 = ae.get(1), a22 = ae.get(5), a23 = ae.get(9), a24 = ae.get(13);
@@ -331,7 +332,7 @@ public class Matrix4
 	 */
 	public Vector3 multiplyVector3(Vector3 v)
 	{
-		Float32Array te = this.getArray();
+		Float64Array te = this.getArray();
 	
 		double vx = v.getX();
 		double vy = v.getY();
@@ -356,7 +357,7 @@ public class Matrix4
 	 */
 	public Vector4 multiplyVector4(Vector4 v)
 	{
-		Float32Array te = this.getArray();
+		Float64Array te = this.getArray();
 		double vx = v.x, vy = v.y, vz = v.z, vw = v.w;
 
 		v.setX( te.get(0) * vx + te.get(4) * vy + te.get(8) * vz + te.get(12) * vw );
@@ -378,7 +379,7 @@ public class Matrix4
 	 */
 	public Matrix4 lookAt(Vector3 eye, Vector3 target, Vector3 up)
 	{
-		Float32Array te = this.getArray();
+		Float64Array te = this.getArray();
 
 		Vector3 x = Matrix4.__v1;
 		Vector3 y = Matrix4.__v2;
@@ -434,7 +435,7 @@ public class Matrix4
 	 */
 	public Vector4 crossVector(Vector4 a)
 	{
-		Float32Array te = this.getArray();
+		Float64Array te = this.getArray();
 		Vector4 v = new Vector4();
 
 		v.x = te.get(0) * a.x + te.get(4) * a.y + te.get(8) * a.z + te.get(12) * a.w;
@@ -501,7 +502,7 @@ public class Matrix4
 	 */
 	public Matrix4 transpose()
 	{
-		Float32Array te = this.getArray();
+		Float64Array te = this.getArray();
 		double tmp;
 
 		tmp = te.get(1); te.set(1, te.get(4)); te.set(4, tmp);
@@ -530,7 +531,7 @@ public class Matrix4
 	 * 
 	 * @return the modified input vector
 	 */
-	public Float32Array flattenToArray(Float32Array flat)
+	public Float64Array flattenToArray(Float64Array flat)
 	{
 		return flattenToArray(flat, 0);
 	}
@@ -551,7 +552,7 @@ public class Matrix4
 	 * 
 	 * @return the modified input vector
 	 */
-	public Float32Array flattenToArray(Float32Array flat, int offset)
+	public Float64Array flattenToArray(Float64Array flat, int offset)
 	{
 		flat.set(offset, this.getArray().get(0));
 		flat.set(offset + 1, this.getArray().get(1));
@@ -613,8 +614,8 @@ public class Matrix4
 	 */
 	public Matrix4 getInverse(Matrix4 m)
 	{
-		Float32Array te = this.getArray();
-		Float32Array me = m.getArray();
+		Float64Array te = this.getArray();
+		Float64Array me = m.getArray();
 
 		double n11 = me.get(0), n12 = me.get(4), n13 = me.get(8),  n14 = me.get(12);
 		double n21 = me.get(1), n22 = me.get(5), n23 = me.get(9),  n24 = me.get(13);
@@ -649,7 +650,7 @@ public class Matrix4
 
 	public Matrix4 setRotationFromEuler(Vector3 v, Euler order)
 	{
-		Float32Array te = this.elements;
+		Float64Array te = this.elements;
 
 		double x = v.x, y = v.y, z = v.z;
 		double a = Math.cos( x ), b = Math.sin( x );
@@ -851,7 +852,7 @@ public class Matrix4
 	 */
 	public Matrix4 extractPosition(Matrix4 m)
 	{
-		Float32Array me = m.getArray();
+		Float64Array me = m.getArray();
 
 		this.getArray().set(12, me.get(12));
 		this.getArray().set(13, me.get(13));
@@ -885,7 +886,7 @@ public class Matrix4
 	 */
 	public Matrix4 extractRotation(Matrix4 m)
 	{
-		Float32Array me = m.getArray();
+		Float64Array me = m.getArray();
 
 		Vector3 vector = Matrix4.__v1;
 
@@ -1258,7 +1259,7 @@ public class Matrix4
 	 */
 	public Matrix4 makeFrustum(double left, double right, double bottom, double top, double near, double far)
 	{
-		Float32Array te = this.getArray();
+		Float64Array te = this.getArray();
 		double x = 2.0 * near / ( right - left );
 		double y = 2.0 * near / ( top - bottom );
 
@@ -1302,7 +1303,7 @@ public class Matrix4
 	 */
 	public Matrix4 makeOrthographic(double left, double right, double top, double bottom, double near, double far)
 	{
-		Float32Array te = this.elements;
+		Float64Array te = this.elements;
 		double w = right - left;
 		double h = top - bottom;
 		double p = far - near;
@@ -1327,7 +1328,7 @@ public class Matrix4
 	 */
 	public Matrix4 clone()
 	{
-		Float32Array te = this.getArray();
+		Float64Array te = this.getArray();
 
 		return new Matrix4(
 			te.get(0), te.get(4), te.get(8), te.get(12), 
@@ -1345,7 +1346,7 @@ public class Matrix4
 	{
 		String retval = "[";
 		
-		for(int i = 0; i < this.getArray().getLength(); i++)
+		for(int i = 0; i < this.getArray().length(); i++)
 			retval += this.getArray().get(i) + ", ";
 		
 		return retval + "]";

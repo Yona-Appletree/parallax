@@ -20,7 +20,9 @@ package thothbot.parallax.core.shared.lights;
 
 import java.util.Map;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Vector3;
 import thothbot.parallax.core.shared.materials.MeshLambertMaterial;
@@ -44,16 +46,16 @@ public class PointLight extends Light
 {
 	public static class UniformPoint implements Light.UniformLight 
 	{
-		public Float32Array distances;
-		public Float32Array colors;
-		public Float32Array positions;
+		public Float64Array distances;
+		public Float64Array colors;
+		public Float64Array positions;
 		
 		@Override
 		public void reset() 
 		{
-			this.distances = (Float32Array) Float32Array.createArray();
-			this.colors    = (Float32Array) Float32Array.createArray();
-			this.positions = (Float32Array) Float32Array.createArray();
+			this.distances = (Float64Array) Float64ArrayNative.createArray();
+			this.colors    = (Float64Array) Float64ArrayNative.createArray();
+			this.positions = (Float64Array) Float64ArrayNative.createArray();
 			
 		}
 
@@ -102,13 +104,13 @@ public class PointLight extends Light
 	@Override
 	public void setupRendererLights(RendererLights zlights, boolean isGammaInput) 
 	{
-		Float32Array pointColors     = zlights.point.colors;
-		Float32Array pointPositions  = zlights.point.positions;
-		Float32Array pointDistances  = zlights.point.distances;
+		Float64Array pointColors     = zlights.point.colors;
+		Float64Array pointPositions  = zlights.point.positions;
+		Float64Array pointDistances  = zlights.point.distances;
 		
 		double intensity = getIntensity();
 		double distance = getDistance();
-		int pointOffset = pointColors.getLength();
+		int pointOffset = pointColors.length();
 
 		if ( isGammaInput ) 
 			setColorGamma( pointColors, pointOffset, getColor(), intensity ); 

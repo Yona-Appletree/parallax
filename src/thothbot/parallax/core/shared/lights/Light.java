@@ -20,7 +20,8 @@ package thothbot.parallax.core.shared.lights;
 
 import java.util.Map;
 
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
+import com.google.gwt.typedarrays.shared.Float64Array;
+
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Color;
 import thothbot.parallax.core.shared.objects.Object3D;
@@ -66,14 +67,14 @@ public abstract class Light extends Object3D
 	
 	public abstract void setupRendererLights(RendererLights zlights, boolean isGammaInput);
 
-	protected void setColorGamma( Float32Array array, int offset, Color color, double intensity ) 
+	protected void setColorGamma( Float64Array array, int offset, Color color, double intensity ) 
 	{
 		array.set( offset,     color.getR() * color.getR() * intensity * intensity);
 		array.set( offset + 1, color.getG() * color.getG() * intensity * intensity);
 		array.set( offset + 2, color.getB() * color.getB() * intensity * intensity);
 	}
 
-	protected void  setColorLinear( Float32Array array, int offset, Color color, double intensity ) 
+	protected void  setColorLinear( Float64Array array, int offset, Color color, double intensity ) 
 	{
 		array.set( offset,     color.getR() * intensity);
 		array.set( offset + 1, color.getG() * intensity);

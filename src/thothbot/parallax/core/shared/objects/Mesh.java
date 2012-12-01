@@ -25,8 +25,6 @@ import java.util.Map;
 
 import thothbot.parallax.core.client.gl2.WebGLBuffer;
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
-import thothbot.parallax.core.client.gl2.arrays.Uint16Array;
 import thothbot.parallax.core.client.gl2.enums.BeginMode;
 import thothbot.parallax.core.client.gl2.enums.BufferTarget;
 import thothbot.parallax.core.client.gl2.enums.BufferUsage;
@@ -51,6 +49,9 @@ import thothbot.parallax.core.shared.materials.Material;
 import thothbot.parallax.core.shared.materials.MeshBasicMaterial;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.client.Uint16ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
 
 /**
  * Base class for Mesh objects.
@@ -65,7 +66,7 @@ public class Mesh extends GeometryObject
 	private List<Double> morphTargetInfluences;
 	private List<Integer> morphTargetForcedOrder;
 	private Map<String, Integer> morphTargetDictionary;
-	public Float32Array __webglMorphTargetInfluences;
+	public Float64Array __webglMorphTargetInfluences;
 
 	private static MeshBasicMaterial defaultMaterial = new MeshBasicMaterial();
 	static {
@@ -251,49 +252,49 @@ public class Mesh extends GeometryObject
 		Material.SHADING normalType = material.bufferGuessNormalType();
 		Material.COLORS vertexColorType = material.bufferGuessVertexColorType();
 
-		geometryGroup.setWebGlVertexArray( Float32Array.create(nvertices * 3) );
+		geometryGroup.setWebGlVertexArray( Float64ArrayNative.create(nvertices * 3) );
 
 		if (normalType != null)
-			geometryGroup.setWebGlNormalArray( Float32Array.create(nvertices * 3) );
+			geometryGroup.setWebGlNormalArray( Float64ArrayNative.create(nvertices * 3) );
 
 		if (geometry.hasTangents())
-			geometryGroup.setWebGlTangentArray( Float32Array.create(nvertices * 4) );
+			geometryGroup.setWebGlTangentArray( Float64ArrayNative.create(nvertices * 4) );
 
 		if (vertexColorType != null)
-			geometryGroup.setWebGlColorArray( Float32Array.create(nvertices * 3) );
+			geometryGroup.setWebGlColorArray( Float64ArrayNative.create(nvertices * 3) );
 
 		if (uvType) 
 		{
 			if (geometry.getFaceUvs().size() > 0 || geometry.getFaceVertexUvs().size() > 0)
-				geometryGroup.setWebGlUvArray( Float32Array.create(nvertices * 2) );
+				geometryGroup.setWebGlUvArray( Float64ArrayNative.create(nvertices * 2) );
 
 			if (geometry.getFaceUvs().size() > 1 || geometry.getFaceVertexUvs().size() > 1)
-				geometryGroup.setWebGlUv2Array( Float32Array.create(nvertices * 2) );
+				geometryGroup.setWebGlUv2Array( Float64ArrayNative.create(nvertices * 2) );
 		}
 
 		if (this.geometry.getSkinWeights().size() > 0 && this.geometry.getSkinIndices().size() > 0) 
 		{
-			geometryGroup.setWebGlSkinIndexArray  ( Float32Array.create(nvertices * 4) );
-			geometryGroup.setWebGlSkinWeightArray ( Float32Array.create(nvertices * 4) );
+			geometryGroup.setWebGlSkinIndexArray  ( Float64ArrayNative.create(nvertices * 4) );
+			geometryGroup.setWebGlSkinWeightArray ( Float64ArrayNative.create(nvertices * 4) );
 		}
 
-		geometryGroup.setWebGlFaceArray( Uint16Array.create(ntris * 3) );
-		geometryGroup.setWebGlLineArray( Uint16Array.create(nlines * 2) );
+		geometryGroup.setWebGlFaceArray( Uint16ArrayNative.create(ntris * 3) );
+		geometryGroup.setWebGlLineArray( Uint16ArrayNative.create(nlines * 2) );
 
 		if (geometryGroup.numMorphTargets > 0) 
 		{
-			geometryGroup.__morphTargetsArrays = new ArrayList<Float32Array>();
+			geometryGroup.__morphTargetsArrays = new ArrayList<Float64Array>();
 
 			for (int m = 0; m < geometryGroup.numMorphTargets; m++)
-				geometryGroup.__morphTargetsArrays.add(Float32Array.create(nvertices * 3));
+				geometryGroup.__morphTargetsArrays.add(Float64ArrayNative.create(nvertices * 3));
 		}
 
 		if (geometryGroup.numMorphNormals > 0) 
 		{
-			geometryGroup.__morphNormalsArrays = new ArrayList<Float32Array>();
+			geometryGroup.__morphNormalsArrays = new ArrayList<Float64Array>();
 
 			for (int m = 0; m < geometryGroup.numMorphNormals; m++)
-				geometryGroup.__morphNormalsArrays.add(Float32Array.create(nvertices * 3));
+				geometryGroup.__morphNormalsArrays.add(Float64ArrayNative.create(nvertices * 3));
 		}
 
 		geometryGroup.__webglFaceCount = ntris * 3;
@@ -334,7 +335,7 @@ public class Mesh extends GeometryObject
 
 					attribute.size = size;
 
-					attribute.array = Float32Array.create(nvertices * size);
+					attribute.array = Float64ArrayNative.create(nvertices * size);
 
 					attribute.buffer = gl.createBuffer();
 					attribute.belongsToAttribute = a;
@@ -469,7 +470,7 @@ public class Mesh extends GeometryObject
 		 
 		 if ( getGeometry().isVerticesNeedUpdate() ) 
 		 {
-			 Float32Array vertexArray = geometryGroup.getWebGlVertexArray();
+			 Float64Array vertexArray = geometryGroup.getWebGlVertexArray();
 			 int offset = 0;
 			 
 			 for ( int f = 0, fl = chunk_faces3.size(); f < fl; f ++ ) 
@@ -546,7 +547,7 @@ public class Mesh extends GeometryObject
 					 Vector3 v2 = morphTargets.get( vk ).vertices.get( face.getB() );
 					 Vector3 v3 = morphTargets.get( vk ).vertices.get( face.getC() );
 
-					 Float32Array vka = geometryGroup.__morphTargetsArrays.get(vk);
+					 Float64Array vka = geometryGroup.__morphTargetsArrays.get(vk);
 
 					 vka.set(offset_morphTarget, v1.getX());
 					 vka.set(offset_morphTarget + 1, v1.getY());
@@ -580,7 +581,7 @@ public class Mesh extends GeometryObject
 							 n3 = n1;
 						 }
 
-						 Float32Array nka = geometryGroup.__morphNormalsArrays.get( vk );
+						 Float64Array nka = geometryGroup.__morphNormalsArrays.get( vk );
 
 						 nka.set(offset_morphTarget, n1.getX());
 						 nka.set(offset_morphTarget + 1, n1.getY());
@@ -613,7 +614,7 @@ public class Mesh extends GeometryObject
 					 Vector3 v3 = morphTargets.get(vk).vertices.get(face.getC());
 					 Vector3 v4 = morphTargets.get(vk).vertices.get(face.getD());
 
-					 Float32Array vka = geometryGroup.__morphTargetsArrays.get(vk);
+					 Float64Array vka = geometryGroup.__morphTargetsArrays.get(vk);
 
 					 vka.set(offset_morphTarget, v1.getX());
 					 vka.set(offset_morphTarget + 1, v1.getY());
@@ -656,7 +657,7 @@ public class Mesh extends GeometryObject
 
 						 }
 
-						 Float32Array nka = geometryGroup.__morphNormalsArrays.get( vk );
+						 Float64Array nka = geometryGroup.__morphNormalsArrays.get( vk );
 
 						 nka.set(offset_morphTarget, n1.getX());
 						 nka.set(offset_morphTarget + 1, n1.getY());
@@ -697,8 +698,8 @@ public class Mesh extends GeometryObject
 		 {
 			 int offset_skin = 0;
 
-			 Float32Array skinIndexArray = geometryGroup.getWebGlSkinIndexArray();
-			 Float32Array skinWeightArray = geometryGroup.getWebGlSkinWeightArray();
+			 Float64Array skinIndexArray = geometryGroup.getWebGlSkinIndexArray();
+			 Float64Array skinWeightArray = geometryGroup.getWebGlSkinWeightArray();
 			 
 			 for ( int f = 0, fl = chunk_faces3.size(); f < fl; f ++ ) 
 			 {
@@ -825,7 +826,7 @@ public class Mesh extends GeometryObject
 
 		 if ( getGeometry().isColorsNeedUpdate() && (vertexColorType != null )) 
 		 {
-			 Float32Array colorArray = geometryGroup.getWebGlColorArray();
+			 Float64Array colorArray = geometryGroup.getWebGlColorArray();
 			 int offset_color = 0;
 			 
 			 for ( int f = 0, fl = chunk_faces3.size(); f < fl; f ++ ) 
@@ -918,7 +919,7 @@ public class Mesh extends GeometryObject
 
 		 if ( getGeometry().isTangentsNeedUpdate() && geometry.hasTangents()) 
 		 {
-			 Float32Array tangentArray = geometryGroup.getWebGlTangentArray();
+			 Float64Array tangentArray = geometryGroup.getWebGlTangentArray();
 			 int offset_tangent = 0;
 			 
 			 for ( int f = 0, fl = chunk_faces3.size(); f < fl; f ++ ) 
@@ -1078,7 +1079,7 @@ public class Mesh extends GeometryObject
 
 		 if ( getGeometry().isUvsNeedUpdate() && (obj_uvs != null) && uvType ) 
 		 {
-			 Float32Array uvArray = geometryGroup.getWebGlUvArray();
+			 Float64Array uvArray = geometryGroup.getWebGlUvArray();
 			 int offset_uv = 0;
 			 
 			 for (int  f = 0, fl = chunk_faces3.size(); f < fl; f ++ ) 
@@ -1130,7 +1131,7 @@ public class Mesh extends GeometryObject
 
 		 if ( getGeometry().isUvsNeedUpdate() && (obj_uvs2 != null && obj_uvs2.size() > 0) && uvType ) 
 		 {
-			 Float32Array uv2Array = geometryGroup.getWebGlUv2Array();
+			 Float64Array uv2Array = geometryGroup.getWebGlUv2Array();
 			 int offset_uv2 = 0;
 			 
 			 for ( int f = 0, fl = chunk_faces3.size(); f < fl; f ++ ) 

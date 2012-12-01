@@ -28,7 +28,6 @@ import thothbot.parallax.core.client.gl2.WebGLConstants;
 import thothbot.parallax.core.client.gl2.WebGLProgram;
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
 import thothbot.parallax.core.client.gl2.WebGLShader;
-import thothbot.parallax.core.client.gl2.arrays.Float32Array;
 import thothbot.parallax.core.client.gl2.enums.ProgramParameter;
 import thothbot.parallax.core.shared.Log;
 import thothbot.parallax.core.shared.core.FastMap;
@@ -37,6 +36,8 @@ import thothbot.parallax.core.shared.core.Mathematics;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.Float64Array;
 
 /**
  * Basic abstract shader.
@@ -426,7 +427,7 @@ public abstract class Shader
 		return src;
 	}
 
-	public static Float32Array buildKernel( double sigma ) 
+	public static Float64Array buildKernel( double sigma ) 
 	{ 
 		int kMaxKernelSize = 25; 
 		int kernelSize = (int) (2 * Math.ceil( sigma * 3 ) + 1);
@@ -436,7 +437,7 @@ public abstract class Shader
 		
 		double halfWidth = ( kernelSize - 1.0 ) * 0.5;
 
-		Float32Array values = Float32Array.create(kernelSize);
+		Float64Array values = Float64ArrayNative.create(kernelSize);
 
 		double sum = 0.0;
 		for ( int i = 0; i < kernelSize; ++i ) 
