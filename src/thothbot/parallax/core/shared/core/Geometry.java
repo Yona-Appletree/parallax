@@ -107,8 +107,6 @@ public class Geometry extends GeometryBuffer implements Geometric
 	private List<Vector3> skinVerticesA;
 	private List<Vector3> skinVerticesB;
 
-	private List<Bone> bones;
-
 	public List<List<Integer>> sortArray;
 	
 	private boolean isMorphTargetsNeedUpdate;

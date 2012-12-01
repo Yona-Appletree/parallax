@@ -898,8 +898,6 @@ public class WebGLRenderer implements HasEventBus
 		if ( scene.overrideMaterial != null ) 
 		{
 			Log.error("render(): override material");
-			
-			Material material = scene.overrideMaterial;
 
 			//TODO: FIX
 //			this.setBlending( material.getBlending(), material.getBlendEquation(), material.getBlendSrc(), material.getBlendDst() );
@@ -1238,7 +1236,7 @@ public class WebGLRenderer implements HasEventBus
 					// vertices
 
 					Float64Array position = geometryBuffer.getWebGlVertexArray();
-					int positionSize = position.length();
+					position.length();
 
 					gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglVertexBuffer );
 					gl.vertexAttribPointer( attributes.get("position"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 ); // 4 bytes per Float32
@@ -1249,7 +1247,7 @@ public class WebGLRenderer implements HasEventBus
 
 					if ( attributes.get("normal") >= 0 && normal != null ) 
 					{
-						int normalSize = normal.length();
+						normal.length();
 
 						gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglNormalBuffer );
 						gl.vertexAttribPointer( attributes.get("normal"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 );
@@ -1263,7 +1261,7 @@ public class WebGLRenderer implements HasEventBus
 					{
 						if ( geometryBuffer.__webglUVBuffer != null ) 
 						{
-							int uvSize = uv.length();
+							uv.length();
 
 							gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglUVBuffer );
 							gl.vertexAttribPointer( attributes.get("uv"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 );
@@ -1283,7 +1281,7 @@ public class WebGLRenderer implements HasEventBus
 
 					if ( attributes.get("color") >= 0 && color != null ) 
 					{
-						int colorSize = color.length();
+						color.length();
 
 						gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglColorBuffer );
 						gl.vertexAttribPointer( attributes.get("color"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 );
@@ -1295,7 +1293,7 @@ public class WebGLRenderer implements HasEventBus
 
 					if ( attributes.get("tangent") >= 0 && tangent != null )
 					{
-						int tangentSize = tangent.length();
+						tangent.length();
 
 						gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglTangentBuffer );
 						gl.vertexAttribPointer( attributes.get("tangent"), 3, DataType.FLOAT, false, 0, startIndex * 3 * 4 );
@@ -1303,7 +1301,7 @@ public class WebGLRenderer implements HasEventBus
 
 					// indices
 
-					Int16Array index = geometryBuffer.getWebGlIndexArray();
+					geometryBuffer.getWebGlIndexArray();
 
 					gl.bindBuffer( BufferTarget.ELEMENT_ARRAY_BUFFER, geometryBuffer.__webglIndexBuffer );
 				}
@@ -1325,7 +1323,7 @@ public class WebGLRenderer implements HasEventBus
 				// vertices
 
 				Float64Array position = geometryBuffer.getWebGlVertexArray();
-				int positionSize = position.length();
+				position.length();
 
 				gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglVertexBuffer );
 				gl.vertexAttribPointer( attributes.get("position"), 3, DataType.FLOAT, false, 0, 0 );
@@ -1336,7 +1334,7 @@ public class WebGLRenderer implements HasEventBus
 
 				if ( attributes.get("color") >= 0 && color != null ) 
 				{
-					int colorSize = color.length();
+					color.length();
 
 					gl.bindBuffer( BufferTarget.ARRAY_BUFFER, geometryBuffer.__webglColorBuffer );
 					gl.vertexAttribPointer( attributes.get("color"), 3, DataType.FLOAT, false, 0, 0 );

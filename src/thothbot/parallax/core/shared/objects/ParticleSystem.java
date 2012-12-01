@@ -196,7 +196,7 @@ public class ParticleSystem extends GeometryObject
 		List<List<Integer>> sortArray = geometry.sortArray;
 
 		boolean dirtyVertices = geometry.isVerticesNeedUpdate();
-		boolean dirtyElements = geometry.isElementsNeedUpdate();
+		geometry.isElementsNeedUpdate();
 		boolean dirtyColors   = geometry.isColorsNeedUpdate();
 
 		List<Attribute> customAttributes = geometry.__webglCustomAttributesList;

@@ -195,8 +195,6 @@ public class Path extends CurvePath
 			double aStartAngle, double aEndAngle, boolean aClockwise ) 
 	{
 
-		List<Object> lastargs = this.actions.get( this.actions.size() - 1 ).args;
-				
 		EllipseCurve curve = new EllipseCurve( aX, aY, xRadius, yRadius,
 				aStartAngle, aEndAngle, aClockwise );
 		add( curve );

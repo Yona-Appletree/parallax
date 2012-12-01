@@ -57,8 +57,6 @@ public class MeshBasicMaterial extends Material
 	
 	private boolean isSkinning;
 	private boolean isMorphTargets;
-	private boolean isMorphNormals;
-	
 	private int numSupportedMorphTargets;
 	private int numSupportedMorphNormals;
 	
@@ -221,7 +219,6 @@ public class MeshBasicMaterial extends Material
 
 	@Override
 	public void setMorphNormals(boolean isMorphNormals) {
-		this.isMorphNormals = isMorphNormals;
 	}
 	
 	@Override

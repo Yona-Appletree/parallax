@@ -84,7 +84,7 @@ public class GeometryUtils
 	private static void merge( Geometry geometry1, Geometry geometry2, Matrix4 matrix, Matrix4 matrixRotation ) 
 	{
 		int vertexOffset = geometry1.getVertices().size();
-		int uvPosition = geometry1.getFaceVertexUvs().get( 0 ).size();
+		geometry1.getFaceVertexUvs().get( 0 ).size();
 
 		List<Vector3> vertices1 = geometry1.getVertices();
 		List<Vector3> vertices2 = geometry2.getVertices();

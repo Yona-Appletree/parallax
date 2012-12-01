@@ -543,8 +543,8 @@ public class GeometryBuffer implements Geometric
 
 		Int16Array indices = getWebGlIndexArray();
 		Float64Array positions = getWebGlVertexArray();
-		Float64Array normals = getWebGlNormalArray();
-		Float64Array uvs = getWebGlUvArray();
+		getWebGlNormalArray();
+		getWebGlUvArray();
 
 		int nVertices = positions.length() / 3;
 
@@ -555,7 +555,7 @@ public class GeometryBuffer implements Geometric
 			setWebGlTangentArray(Float64ArrayNative.create(nTangentElements));
 		}
 
-		Float64Array tangents = getWebGlTangentArray();
+		getWebGlTangentArray();
 
 		List<Vector3> tan1 = new ArrayList<Vector3>();
 		List<Vector3> tan2 = new ArrayList<Vector3>();

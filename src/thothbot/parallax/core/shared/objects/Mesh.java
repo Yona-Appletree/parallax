@@ -1254,8 +1254,6 @@ public class Mesh extends GeometryObject
 				 if ( ! customAttribute.__original.needsUpdate ) continue;
 
 				 int offset_custom = 0;
-				 int offset_customSrc = 0;
-
 				 if ( customAttribute.size == 1 ) 
 				 {
 					 if ( customAttribute.getBoundTo() == null 

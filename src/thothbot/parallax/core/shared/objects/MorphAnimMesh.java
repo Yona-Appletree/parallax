@@ -46,8 +46,6 @@ public class MorphAnimMesh extends Mesh
 	private int lastKeyframe = 0;
 	private int currentKeyframe = 0;
 	
-	private Map<String, Animation> animations;
-	
 	public MorphAnimMesh(Geometry geometry, Material material) 
 	{			
 		super(geometry, material);
