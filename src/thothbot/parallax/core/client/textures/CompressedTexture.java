@@ -224,8 +224,8 @@ public class CompressedTexture extends Texture
 			Uint8Array byteArray = Uint8ArrayNative.create( buffer, dataOffset, dataLength );
 
 			DataTexture mipmap = new DataTexture(width, height);
-			//TODO: change to google
-//			mipmap.setData(byteArray);
+
+			mipmap.setData(byteArray);
 			mipmaps.add( mipmap );
 
 			dataOffset += dataLength;
