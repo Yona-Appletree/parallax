@@ -22,7 +22,6 @@ import java.util.List;
 
 import com.google.gwt.typedarrays.client.Float64ArrayNative;
 
-import thothbot.parallax.core.client.gl2.WebGLConstants;
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
 import thothbot.parallax.core.client.gl2.enums.BeginMode;
 import thothbot.parallax.core.client.gl2.enums.BufferTarget;

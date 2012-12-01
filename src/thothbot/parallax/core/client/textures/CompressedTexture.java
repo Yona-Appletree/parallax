@@ -34,6 +34,41 @@ import com.google.gwt.xhr.client.XMLHttpRequest;
 
 public class CompressedTexture extends Texture 
 {
+	private static final int DDS_MAGIC = 0x20534444;
+
+	@SuppressWarnings("unused")
+	private static final int DDSD_CAPS = 0x1,
+		DDSD_HEIGHT = 0x2,
+		DDSD_WIDTH = 0x4,
+		DDSD_PITCH = 0x8,
+		DDSD_PIXELFORMAT = 0x1000,
+		DDSD_MIPMAPCOUNT = 0x20000,
+		DDSD_LINEARSIZE = 0x80000,
+		DDSD_DEPTH = 0x800000;
+
+	@SuppressWarnings("unused")
+	private static final int DDSCAPS_COMPLEX = 0x8,
+		DDSCAPS_MIPMAP = 0x400000,
+		DDSCAPS_TEXTURE = 0x1000;
+
+	@SuppressWarnings("unused")
+	private static final int DDSCAPS2_CUBEMAP = 0x200,
+		DDSCAPS2_CUBEMAP_POSITIVEX = 0x400,
+		DDSCAPS2_CUBEMAP_NEGATIVEX = 0x800,
+		DDSCAPS2_CUBEMAP_POSITIVEY = 0x1000,
+		DDSCAPS2_CUBEMAP_NEGATIVEY = 0x2000,
+		DDSCAPS2_CUBEMAP_POSITIVEZ = 0x4000,
+		DDSCAPS2_CUBEMAP_NEGATIVEZ = 0x8000,
+		DDSCAPS2_VOLUME = 0x200000;
+
+	@SuppressWarnings("unused")
+	private static final int DDPF_ALPHAPIXELS = 0x1,
+		DDPF_ALPHA = 0x2,
+		DDPF_FOURCC = 0x4,
+		DDPF_RGB = 0x40,
+		DDPF_YUV = 0x200,
+		DDPF_LUMINANCE = 0x20000;
+	
 	private int compressedFormat;
 	private List<DataTexture> mipmaps;
 	
@@ -103,37 +138,6 @@ public class CompressedTexture extends Texture
 	private void parseDDS( ArrayBuffer buffer, boolean loadMipmaps ) 
 	{
 //		var dds = { mipmaps: [], width: 0, height: 0, format: null, mipmapCount: 1 };
-
-		int DDS_MAGIC = 0x20534444;
-
-		int DDSD_CAPS = 0x1,
-			DDSD_HEIGHT = 0x2,
-			DDSD_WIDTH = 0x4,
-			DDSD_PITCH = 0x8,
-			DDSD_PIXELFORMAT = 0x1000,
-			DDSD_MIPMAPCOUNT = 0x20000,
-			DDSD_LINEARSIZE = 0x80000,
-			DDSD_DEPTH = 0x800000;
-
-		int DDSCAPS_COMPLEX = 0x8,
-			DDSCAPS_MIPMAP = 0x400000,
-			DDSCAPS_TEXTURE = 0x1000;
-
-		int DDSCAPS2_CUBEMAP = 0x200,
-			DDSCAPS2_CUBEMAP_POSITIVEX = 0x400,
-			DDSCAPS2_CUBEMAP_NEGATIVEX = 0x800,
-			DDSCAPS2_CUBEMAP_POSITIVEY = 0x1000,
-			DDSCAPS2_CUBEMAP_NEGATIVEY = 0x2000,
-			DDSCAPS2_CUBEMAP_POSITIVEZ = 0x4000,
-			DDSCAPS2_CUBEMAP_NEGATIVEZ = 0x8000,
-			DDSCAPS2_VOLUME = 0x200000;
-
-		int DDPF_ALPHAPIXELS = 0x1,
-			DDPF_ALPHA = 0x2,
-			DDPF_FOURCC = 0x4,
-			DDPF_RGB = 0x40,
-			DDPF_YUV = 0x200,
-			DDPF_LUMINANCE = 0x20000;
 
 		int FOURCC_DXT1 = fourCCToInt32("DXT1");
 		int FOURCC_DXT3 = fourCCToInt32("DXT3");

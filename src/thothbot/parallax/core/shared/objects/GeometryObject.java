@@ -21,7 +21,6 @@ package thothbot.parallax.core.shared.objects;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.google.gwt.typedarrays.client.Float32ArrayNative;
 import com.google.gwt.typedarrays.client.Float64ArrayNative;
 
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
