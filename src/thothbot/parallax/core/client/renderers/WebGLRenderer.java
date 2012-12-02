@@ -107,7 +107,6 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
-import com.google.gwt.typedarrays.shared.Int16Array;
 
 /**
  * The WebGL renderer displays your beautifully crafted {@link Scene}s using WebGL, if your device supports it.
@@ -1525,6 +1524,7 @@ public class WebGLRenderer implements HasEventBus
 			Log.error("material.getId() != this.cache_currentMaterialId");
 		}
 
+		Log.error(1);
 		if ( refreshMaterial || camera != this.cache_currentCamera ) 
 		{
 			getGL().uniformMatrix4fv( m_uniforms.get("projectionMatrix").getLocation(), false, camera._projectionMatrixArray );
