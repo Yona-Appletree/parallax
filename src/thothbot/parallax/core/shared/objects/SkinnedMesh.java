@@ -104,7 +104,7 @@ public class SkinnedMesh extends Mesh
 //
 //			}
 //
-//			this.boneMatrices = new Float32Array( 16 * this.bones.length );
+//			this.boneMatrices = new Float64Array( 16 * this.bones.length );
 //
 //			this.pose();
 //
