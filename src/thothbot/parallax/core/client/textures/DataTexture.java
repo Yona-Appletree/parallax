@@ -18,7 +18,7 @@
 
 package thothbot.parallax.core.client.textures;
 
-import com.google.gwt.typedarrays.client.Uint8ArrayNative;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 import com.google.gwt.typedarrays.shared.Uint8Array;
 
 import thothbot.parallax.core.client.gl2.enums.PixelFormat;
@@ -84,7 +84,7 @@ public class DataTexture extends Texture
 	public void generateDataTexture( Color color ) 
 	{
 		int size = width * height;
-		Uint8Array data = Uint8ArrayNative.create( 3 * size );
+		Uint8Array data = TypedArrays.createUint8Array( 3 * size );
 
 		int r = (int)Math.floor( color.getR() * 255 );
 		int g = (int)Math.floor( color.getG() * 255 );

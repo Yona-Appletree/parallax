@@ -20,8 +20,8 @@ package thothbot.parallax.core.shared.lights;
 
 import java.util.Map;
 
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Vector3;
@@ -68,13 +68,13 @@ public class SpotLight extends ShadowLight
 		@Override
 		public void reset() 
 		{
-			this.colors    = (Float64Array) Float64ArrayNative.createArray();
-			this.distances = (Float64Array) Float64ArrayNative.createArray();
-			this.positions = (Float64Array) Float64ArrayNative.createArray();
+			this.colors    = (Float64Array) TypedArrays.createFloat64Array(0);
+			this.distances = (Float64Array) TypedArrays.createFloat64Array(0);
+			this.positions = (Float64Array) TypedArrays.createFloat64Array(0);
 			
-			this.directions = (Float64Array) Float64ArrayNative.createArray();
-			this.angles     = (Float64Array) Float64ArrayNative.createArray();
-			this.exponents  = (Float64Array) Float64ArrayNative.createArray();
+			this.directions = (Float64Array) TypedArrays.createFloat64Array(0);
+			this.angles     = (Float64Array) TypedArrays.createFloat64Array(0);
+			this.exponents  = (Float64Array) TypedArrays.createFloat64Array(0);
 		}
 
 		@Override

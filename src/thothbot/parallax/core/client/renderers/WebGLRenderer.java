@@ -105,8 +105,8 @@ import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 /**
  * The WebGL renderer displays your beautifully crafted {@link Scene}s using WebGL, if your device supports it.
@@ -1498,7 +1498,7 @@ public class WebGLRenderer implements HasEventBus
 		{
 			if ( object instanceof Mesh && ((Mesh)object).__webglMorphTargetInfluences == null ) 
 			{
-				((Mesh)object).__webglMorphTargetInfluences = Float64ArrayNative.create( this.maxMorphTargets );
+				((Mesh)object).__webglMorphTargetInfluences = TypedArrays.createFloat64Array( this.maxMorphTargets );
 			}
 		}
 
@@ -1524,10 +1524,9 @@ public class WebGLRenderer implements HasEventBus
 			Log.error("material.getId() != this.cache_currentMaterialId");
 		}
 
-		Log.error(1);
 		if ( refreshMaterial || camera != this.cache_currentCamera ) 
 		{
-			getGL().uniformMatrix4fv( m_uniforms.get("projectionMatrix").getLocation(), false, camera._projectionMatrixArray );
+			getGL().uniformMatrix4fv( m_uniforms.get("projectionMatrix").getLocation(), new Boolean(false), camera._projectionMatrixArray );
 
 			if ( camera != this.cache_currentCamera ) 
 				this.cache_currentCamera = camera;
@@ -1723,7 +1722,7 @@ public class WebGLRenderer implements HasEventBus
 			{ 
 				List<Vector2> listVector2f = (List<Vector2>) value;
 				if ( uniform.getCacheArray() == null )
-					uniform.setCacheArray( Float64ArrayNative.create( 2 * listVector2f.size() ) );
+					uniform.setCacheArray( TypedArrays.createFloat64Array( 2 * listVector2f.size() ) );
 
 				for ( int i = 0, il = listVector2f.size(); i < il; i ++ ) 
 				{
@@ -1739,7 +1738,7 @@ public class WebGLRenderer implements HasEventBus
 			{
 				List<Vector3> listVector3f = (List<Vector3>) value;
 				if ( uniform.getCacheArray() == null )
-					uniform.setCacheArray( Float64ArrayNative.create( 3 * listVector3f.size() ) );
+					uniform.setCacheArray( TypedArrays.createFloat64Array( 3 * listVector3f.size() ) );
 
 				for ( int i = 0, il = listVector3f.size(); i < il; i ++ ) 
 				{
@@ -1756,7 +1755,7 @@ public class WebGLRenderer implements HasEventBus
 			{
 				List<Vector4> listVector4f = (List<Vector4>) value;
 				if ( uniform.getCacheArray() == null)
-					uniform.setCacheArray( Float64ArrayNative.create( 4 * listVector4f.size() ) );
+					uniform.setCacheArray( TypedArrays.createFloat64Array( 4 * listVector4f.size() ) );
 
 
 				for ( int i = 0, il = listVector4f.size(); i < il; i ++ ) 
@@ -1775,7 +1774,7 @@ public class WebGLRenderer implements HasEventBus
 			{
 				Matrix4 matrix4 = (Matrix4) value;
 				if ( uniform.getCacheArray() == null )
-					uniform.setCacheArray( Float64ArrayNative.create( 16 ) );
+					uniform.setCacheArray( TypedArrays.createFloat64Array( 16 ) );
 
 				matrix4.flattenToArray( uniform.getCacheArray() );
 				gl.uniformMatrix4fv( location, false, uniform.getCacheArray() );
@@ -1784,7 +1783,7 @@ public class WebGLRenderer implements HasEventBus
 			{
 				List<Matrix4> listMatrix4f = (List<Matrix4>) value;
 				if ( uniform.getCacheArray() == null )
-					uniform.setCacheArray( Float64ArrayNative.create( 16 * listMatrix4f.size() ) );
+					uniform.setCacheArray( TypedArrays.createFloat64Array( 16 * listMatrix4f.size() ) );
 
 				for ( int i = 0, il = listMatrix4f.size(); i < il; i ++ )
 					listMatrix4f.get( i ).flattenToArray( uniform.getCacheArray(), i * 16 );
@@ -2217,7 +2216,6 @@ public class WebGLRenderer implements HasEventBus
 	 * - limit here is ANGLE's 254 max uniform vectors (up to 54 should be safe)
 	 * 
 	 * @param object
-	 * @return
 	 */
 	private int allocateBones (GeometryObject object ) 
 	{

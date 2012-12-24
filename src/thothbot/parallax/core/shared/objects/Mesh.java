@@ -49,9 +49,8 @@ import thothbot.parallax.core.shared.materials.Material;
 import thothbot.parallax.core.shared.materials.MeshBasicMaterial;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
-import com.google.gwt.typedarrays.client.Uint16ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 /**
  * Base class for Mesh objects.
@@ -252,41 +251,41 @@ public class Mesh extends GeometryObject
 		Material.SHADING normalType = material.bufferGuessNormalType();
 		Material.COLORS vertexColorType = material.bufferGuessVertexColorType();
 
-		geometryGroup.setWebGlVertexArray( Float64ArrayNative.create(nvertices * 3) );
+		geometryGroup.setWebGlVertexArray( TypedArrays.createFloat64Array(nvertices * 3) );
 
 		if (normalType != null)
-			geometryGroup.setWebGlNormalArray( Float64ArrayNative.create(nvertices * 3) );
+			geometryGroup.setWebGlNormalArray( TypedArrays.createFloat64Array(nvertices * 3) );
 
 		if (geometry.hasTangents())
-			geometryGroup.setWebGlTangentArray( Float64ArrayNative.create(nvertices * 4) );
+			geometryGroup.setWebGlTangentArray( TypedArrays.createFloat64Array(nvertices * 4) );
 
 		if (vertexColorType != null)
-			geometryGroup.setWebGlColorArray( Float64ArrayNative.create(nvertices * 3) );
+			geometryGroup.setWebGlColorArray( TypedArrays.createFloat64Array(nvertices * 3) );
 
 		if (uvType) 
 		{
 			if (geometry.getFaceUvs().size() > 0 || geometry.getFaceVertexUvs().size() > 0)
-				geometryGroup.setWebGlUvArray( Float64ArrayNative.create(nvertices * 2) );
+				geometryGroup.setWebGlUvArray( TypedArrays.createFloat64Array(nvertices * 2) );
 
 			if (geometry.getFaceUvs().size() > 1 || geometry.getFaceVertexUvs().size() > 1)
-				geometryGroup.setWebGlUv2Array( Float64ArrayNative.create(nvertices * 2) );
+				geometryGroup.setWebGlUv2Array( TypedArrays.createFloat64Array(nvertices * 2) );
 		}
 
 		if (this.geometry.getSkinWeights().size() > 0 && this.geometry.getSkinIndices().size() > 0) 
 		{
-			geometryGroup.setWebGlSkinIndexArray  ( Float64ArrayNative.create(nvertices * 4) );
-			geometryGroup.setWebGlSkinWeightArray ( Float64ArrayNative.create(nvertices * 4) );
+			geometryGroup.setWebGlSkinIndexArray  ( TypedArrays.createFloat64Array(nvertices * 4) );
+			geometryGroup.setWebGlSkinWeightArray ( TypedArrays.createFloat64Array(nvertices * 4) );
 		}
 
-		geometryGroup.setWebGlFaceArray( Uint16ArrayNative.create(ntris * 3) );
-		geometryGroup.setWebGlLineArray( Uint16ArrayNative.create(nlines * 2) );
+		geometryGroup.setWebGlFaceArray( TypedArrays.createUint16Array(ntris * 3) );
+		geometryGroup.setWebGlLineArray( TypedArrays.createUint16Array(nlines * 2) );
 
 		if (geometryGroup.numMorphTargets > 0) 
 		{
 			geometryGroup.__morphTargetsArrays = new ArrayList<Float64Array>();
 
 			for (int m = 0; m < geometryGroup.numMorphTargets; m++)
-				geometryGroup.__morphTargetsArrays.add(Float64ArrayNative.create(nvertices * 3));
+				geometryGroup.__morphTargetsArrays.add(TypedArrays.createFloat64Array(nvertices * 3));
 		}
 
 		if (geometryGroup.numMorphNormals > 0) 
@@ -294,7 +293,7 @@ public class Mesh extends GeometryObject
 			geometryGroup.__morphNormalsArrays = new ArrayList<Float64Array>();
 
 			for (int m = 0; m < geometryGroup.numMorphNormals; m++)
-				geometryGroup.__morphNormalsArrays.add(Float64ArrayNative.create(nvertices * 3));
+				geometryGroup.__morphNormalsArrays.add(TypedArrays.createFloat64Array(nvertices * 3));
 		}
 
 		geometryGroup.__webglFaceCount = ntris * 3;
@@ -335,7 +334,7 @@ public class Mesh extends GeometryObject
 
 					attribute.size = size;
 
-					attribute.array = Float64ArrayNative.create(nvertices * size);
+					attribute.array = TypedArrays.createFloat64Array(nvertices * size);
 
 					attribute.buffer = gl.createBuffer();
 					attribute.belongsToAttribute = a;

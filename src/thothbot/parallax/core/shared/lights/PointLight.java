@@ -20,8 +20,8 @@ package thothbot.parallax.core.shared.lights;
 
 import java.util.Map;
 
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Vector3;
@@ -53,9 +53,9 @@ public class PointLight extends Light
 		@Override
 		public void reset() 
 		{
-			this.distances = (Float64Array) Float64ArrayNative.createArray();
-			this.colors    = (Float64Array) Float64ArrayNative.createArray();
-			this.positions = (Float64Array) Float64ArrayNative.createArray();
+			this.distances = (Float64Array) TypedArrays.createFloat64Array(0);
+			this.colors    = (Float64Array) TypedArrays.createFloat64Array(0);
+			this.positions = (Float64Array) TypedArrays.createFloat64Array(0);
 			
 		}
 

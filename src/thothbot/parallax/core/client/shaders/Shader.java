@@ -36,8 +36,8 @@ import thothbot.parallax.core.shared.core.Mathematics;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 /**
  * Basic abstract shader.
@@ -437,7 +437,7 @@ public abstract class Shader
 		
 		double halfWidth = ( kernelSize - 1.0 ) * 0.5;
 
-		Float64Array values = Float64ArrayNative.create(kernelSize);
+		Float64Array values = TypedArrays.createFloat64Array( kernelSize );
 
 		double sum = 0.0;
 		for ( int i = 0; i < kernelSize; ++i ) 

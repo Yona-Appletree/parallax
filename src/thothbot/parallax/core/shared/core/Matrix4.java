@@ -18,8 +18,8 @@
 
 package thothbot.parallax.core.shared.core;
 
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 /**
  * This class implements three-dimensional matrix. NxN, where N=4.
@@ -71,7 +71,7 @@ public class Matrix4
 	 */
 	public Matrix4() 
 	{
-		this.elements = Float64ArrayNative.create(16);
+		this.elements = TypedArrays.createFloat64Array(16);
 		identity();
 	}
 
@@ -92,7 +92,7 @@ public class Matrix4
 			double n31, double n32, double n33, double n34, 
 			double n41, double n42, double n43, double n44) 
 	{
-		this.elements = Float64ArrayNative.create(16);
+		this.elements = TypedArrays.createFloat64Array(16);
 		set(
 			n11, n12, n13, n14,
 			n21, n22, n23, n24,

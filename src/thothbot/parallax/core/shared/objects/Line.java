@@ -20,7 +20,7 @@ package thothbot.parallax.core.shared.objects;
 
 import java.util.List;
 
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 import thothbot.parallax.core.client.gl2.WebGLRenderingContext;
 import thothbot.parallax.core.client.gl2.enums.BeginMode;
@@ -151,8 +151,8 @@ public class Line extends GeometryObject
 	{
 		int nvertices = geometry.getVertices().size();
 
-		geometry.setWebGlVertexArray( Float64ArrayNative.create( nvertices * 3 ) );
-		geometry.setWebGlColorArray( Float64ArrayNative.create( nvertices * 3 ) );
+		geometry.setWebGlVertexArray( TypedArrays.createFloat64Array( nvertices * 3 ) );
+		geometry.setWebGlColorArray( TypedArrays.createFloat64Array( nvertices * 3 ) );
 
 		geometry.__webglLineCount = nvertices;
 

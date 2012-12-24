@@ -21,9 +21,9 @@ package thothbot.parallax.core.shared.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
 import com.google.gwt.typedarrays.shared.Int16Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 import com.google.gwt.typedarrays.shared.Uint16Array;
 
 import thothbot.parallax.core.client.gl2.WebGLBuffer;
@@ -434,7 +434,7 @@ public class GeometryBuffer implements Geometric
 
 			if ( getWebGlNormalArray() == null ) 
 			{
-				setWebGlNormalArray(Float64ArrayNative.create(nVertexElements));
+				setWebGlNormalArray(TypedArrays.createFloat64Array(nVertexElements));
 			}
 			else 
 			{
@@ -552,7 +552,7 @@ public class GeometryBuffer implements Geometric
 		{
 			int nTangentElements = 4 * nVertices;
 
-			setWebGlTangentArray(Float64ArrayNative.create(nTangentElements));
+			setWebGlTangentArray(TypedArrays.createFloat64Array(nTangentElements));
 		}
 
 		getWebGlTangentArray();

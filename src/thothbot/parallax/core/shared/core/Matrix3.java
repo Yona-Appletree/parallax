@@ -18,8 +18,8 @@
 
 package thothbot.parallax.core.shared.core;
 
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 import thothbot.parallax.core.shared.Log;
 
@@ -47,7 +47,7 @@ public class Matrix3
 	 */
 	public Matrix3() 
 	{
-		this.elements = Float64ArrayNative.create(9);
+		this.elements = TypedArrays.createFloat64Array(9);
 	}
 	
 
@@ -140,7 +140,7 @@ public class Matrix3
 	 */
 	public Float64Array transposeIntoArray()
 	{
-		Float64Array r = Float64ArrayNative.create(9);
+		Float64Array r = TypedArrays.createFloat64Array(9);
 		Float64Array m = this.getArray();
 
 		r.set(0, m.get(0));

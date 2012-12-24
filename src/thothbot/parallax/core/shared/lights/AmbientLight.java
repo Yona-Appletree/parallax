@@ -20,8 +20,8 @@ package thothbot.parallax.core.shared.lights;
 
 import java.util.Map;
 
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 import thothbot.parallax.core.client.shaders.Uniform;
 import thothbot.parallax.core.shared.core.Color;
@@ -48,7 +48,7 @@ public final class AmbientLight extends Light
 		@Override
 		public void reset() 
 		{
-			this.colors = (Float64Array) Float64ArrayNative.createArray();
+			this.colors = (Float64Array) TypedArrays.createFloat64Array(0);
 			for(int i = 0; i < 3; i++)
 				this.colors.set(i, 0.0);
 			

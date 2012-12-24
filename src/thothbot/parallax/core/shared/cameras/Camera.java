@@ -26,8 +26,8 @@ import thothbot.parallax.core.shared.core.Vector3;
 import thothbot.parallax.core.shared.objects.Object3D;
 
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 /**
  * Abstract base class for cameras.
@@ -52,8 +52,8 @@ public class Camera extends Object3D implements HasEventBus, ViewportResizeHandl
 		this.projectionMatrix = new Matrix4();
 		this.projectionMatrixInverse = new Matrix4();
 		
-		this._viewMatrixArray = Float64ArrayNative.create( 16 );
-		this._projectionMatrixArray = Float64ArrayNative.create( 16 );
+		this._viewMatrixArray = TypedArrays.createFloat64Array( 16 );
+		this._projectionMatrixArray = TypedArrays.createFloat64Array( 16 );
 		
 		addViewportResizeHandler(this);
 	}

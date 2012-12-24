@@ -21,8 +21,8 @@ package thothbot.parallax.core.shared.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 
 import thothbot.parallax.core.client.textures.Texture;
 import thothbot.parallax.core.shared.core.Geometry;
@@ -55,7 +55,7 @@ public class SkinnedMesh extends Mesh
 		this.identityMatrix = new Matrix4();
 
 		this.bones = new ArrayList<Bone>();
-		this.boneMatrices = (Float64Array) Float64ArrayNative.createArray();
+		this.boneMatrices = (Float64Array) TypedArrays.createFloat64Array(0);
 
 		// TODO: FIX
 //		if ( this.geometry.bones != null ) {

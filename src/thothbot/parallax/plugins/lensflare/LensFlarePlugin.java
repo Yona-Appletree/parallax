@@ -51,9 +51,8 @@ import thothbot.parallax.plugins.lensflare.shaders.LensFlareShader;
 import thothbot.parallax.plugins.lensflare.shaders.LensFlareVertexTextureShader;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.typedarrays.client.Float64ArrayNative;
-import com.google.gwt.typedarrays.client.Uint16ArrayNative;
 import com.google.gwt.typedarrays.shared.Float64Array;
+import com.google.gwt.typedarrays.shared.TypedArrays;
 import com.google.gwt.typedarrays.shared.Uint16Array;
 
 public final class LensFlarePlugin extends Plugin
@@ -87,8 +86,8 @@ public final class LensFlarePlugin extends Plugin
 		
 		WebGLRenderingContext gl = getRenderer().getGL();
 
-		lensFlare.vertices = Float64ArrayNative.create( 8 + 8 );
-		lensFlare.faces = Uint16ArrayNative.create( 6 );
+		lensFlare.vertices = TypedArrays.createFloat64Array( 8 + 8 );
+		lensFlare.faces = TypedArrays.createUint16Array( 6 );
 
 		int i = 0;
 		lensFlare.vertices.set( i++, -1); lensFlare.vertices.set( i++, -1);	// vertex
