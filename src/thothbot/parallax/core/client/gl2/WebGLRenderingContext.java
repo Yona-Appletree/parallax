@@ -1838,7 +1838,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param v
    */
   public native void uniform1fv(WebGLUniformLocation location, Float64Array v) /*-{
-		this.uniform1fv(location, new Float32Array(Array.prototype.slice.call(v)));
+		this.uniform1fv(location, v);
   }-*/;
 
   /**
@@ -1923,7 +1923,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param v
    */
   public native void uniform2fv(WebGLUniformLocation location, Float64Array v) /*-{
-		this.uniform2fv(location, new Float32Array(Array.prototype.slice.call(v)));
+		this.uniform2fv(location, v);
   }-*/;
 
   /**
@@ -2022,7 +2022,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param v
    */
   public native void uniform3fv(WebGLUniformLocation location, Float64Array v) /*-{
-		this.uniform3fv(location, new Float32Array(Array.prototype.slice.call(v)));
+		this.uniform3fv(location, v);
   }-*/;
 
   /**
@@ -2123,7 +2123,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * @param v
    */
   public native void uniform4fv(WebGLUniformLocation location, Float64Array v) /*-{
-		this.uniform4fv(location, new Float32Array(Array.prototype.slice.call(v)));
+		this.uniform4fv(location, v);
   }-*/;
 
   /**
@@ -2213,7 +2213,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    */
   public native void uniformMatrix2fv(WebGLUniformLocation location, boolean transpose,
       Float64Array value) /*-{
-		this.uniformMatrix2fv(location, transpose, new Float32Array(Array.prototype.slice.call(value)));
+		this.uniformMatrix2fv(location, transpose, value);
   }-*/;
 
   /**
@@ -2254,7 +2254,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    */
   public native void uniformMatrix3fv(WebGLUniformLocation location, boolean transpose,
       Float64Array value) /*-{
-		this.uniformMatrix3fv(location, transpose, new Float32Array(Array.prototype.slice.call(value)));
+		this.uniformMatrix3fv(location, transpose, value);
   }-*/;
 
   /**
@@ -2295,7 +2295,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    */
   public native void uniformMatrix4fv(WebGLUniformLocation location, boolean transpose,
       Float64Array value) /*-{
-		this.uniformMatrix4fv(location, transpose, new Float32Array(Array.prototype.slice.call(value)));
+		this.uniformMatrix4fv(location, transpose, value);
   }-*/;
 
   /**
@@ -2364,7 +2364,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				attribute.
    */
   public native void vertexAttrib1fv(int index, Float64Array value) /*-{
-		this.vertexAttrib1fv(index, new Float32Array(Array.prototype.slice.call(value)));
+		this.vertexAttrib1fv(index, value);
   }-*/;
 
   /**
@@ -2414,7 +2414,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				attribute.
    */
   public native void vertexAttrib2fv(int index, Float64Array value) /*-{
-		this.vertexAttrib2fv(index, new Float32Array(Array.prototype.slice.call(value)));
+		this.vertexAttrib2fv(index, value);
   }-*/;
   
   /**
@@ -2466,7 +2466,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				attribute.
    */
   public native void vertexAttrib3fv(int index, Float64Array value) /*-{
-		this.vertexAttrib3fv(index, new Float32Array(Array.prototype.slice.call(value)));
+		this.vertexAttrib3fv(index, value);
   }-*/;
 
   /**
@@ -2520,7 +2520,7 @@ public final class WebGLRenderingContext extends JavaScriptObject implements Con
    * 				attribute.
    */
   public native void vertexAttrib4fv(int index, Float64Array value) /*-{
-		this.vertexAttrib4fv(index, new Float32Array(Array.prototype.slice.call(value)));
+		this.vertexAttrib4fv(index, value);
   }-*/;
 
   /**
